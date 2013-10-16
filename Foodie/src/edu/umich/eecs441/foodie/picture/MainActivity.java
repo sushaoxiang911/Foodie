@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.net.URI;
 import java.util.Calendar;
 import java.util.Locale;
 
@@ -26,9 +27,22 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+
+
+// This is an activity that get a picture from camera
+// We first use the built-in camera, get a picture and then save
+// an extra to a local place. Notice that we need a folder for 
+// our app to save the learning file, we can just put the file there
+
+// TODO try to use rectangle crop
+// TODO how to integrate it with our app, not that many activity transferring
+
 public class MainActivity extends Activity {
 
 	private Button button;
+	final private int CAMERA = 1;
+	final private int CROP = 2;
+	
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -41,21 +55,20 @@ public class MainActivity extends Activity {
 
 			@Override
 			public void onClick(View arg0) {
-				// TODO Auto-generated method stub
 				
 				File fos = null;
 				try {
-					fos = new File ("/mnt/sdcard/ocr1.jpg");
-					//		fos = new File (Environment.getExternalStorageDirectory().getPath() + File.separator + "ocr1.jpg");
+			//		fos = new File ("/mnt/sdcard/ocr1.jpg");
+					fos = new File (Environment.getExternalStorageDirectory().getPath() + File.separator + "ocr1.jpg");
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
-				Log.i("@!@", "/mnt/sdcard/ocr1.jpg");
-				Uri u = Uri.fromFile(fos);
+			//	Log.i("@!@", "/mnt/sdcard/ocr1.jpg");
+				Uri photoUri = Uri.fromFile(fos);
 				Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
 				intent.putExtra(MediaStore.Images.Media.ORIENTATION, 0);
-				intent.putExtra(MediaStore.EXTRA_OUTPUT, u);
-				startActivityForResult(intent, 1);
+				intent.putExtra(MediaStore.EXTRA_OUTPUT, photoUri);
+				startActivityForResult(intent, CAMERA);
 			}
 		});
 		
@@ -65,16 +78,51 @@ public class MainActivity extends Activity {
 		super.onActivityResult(requestCode, resultCode, data);
 		
 		if (resultCode == Activity.RESULT_OK) {
+			
+			// the activity is camera, put into crop activity
+			if (requestCode == CAMERA) {
+				// get Uri
+				File file = new File(Environment.getExternalStorageDirectory().getPath() + File.separator + "ocr1.jpg");
+				Uri photoUri = Uri.fromFile(file);
+				try {
+			  			Log.i("picture onActivityResult", "requestCode == CAMERA");
+			  			//call the standard crop action intent (the user device may not support it)
+			  			Intent cropIntent = new Intent("com.android.camera.action.CROP"); 
+			  			//indicate image type and Uri
+			  			cropIntent.setDataAndType(photoUri, "image/*");
+			  			//set crop properties
+			  			cropIntent.putExtra("crop", "true");
+			  			//indicate aspect of desired crop
+			  			cropIntent.putExtra("aspectX", 1);
+			  			cropIntent.putExtra("aspectY", 1);
+			  			//indicate output X and Y
+			  			cropIntent.putExtra("outputX", 256);
+			  			cropIntent.putExtra("outputY", 256);
+			  			//retrieve data on return
+			  			cropIntent.putExtra("return-data", true);
+			  			//start the activity - we handle returning in onActivityResult
+			  			startActivityForResult(cropIntent, CROP);  
+		    	} catch(ActivityNotFoundException e){
+		    	//respond to users whose devices do not support the crop action
+		    		//display an error message
+		    		Log.i("picutre onActivityResult", "does not support crop");
+		    		e.printStackTrace();
+		    	}
+			} else if (requestCode == CROP) {
+				// get the returned data
+				Bundle extras = data.getExtras();
+				// get the cropped map 
+				Bitmap photoMap = extras.getParcelable("data");
+				// reference to picture view
+				((ImageView) findViewById(R.id.imageView1)).setImageBitmap(photoMap);
+			}
+			
+			
+			
 	/*		
 			File bb = new File(Environment.getExternalStorageDirectory().getAbsoluteFile() + File.pathSeparator + "orc.jpg");
 			
-			*/
-			
-			
-			/*
-			// check if the sd card is usable
-			// TODO: if there is a way to save the picture to non sd place
-			// since we will delete it
+	
 			String sdCard = Environment.getExternalStorageState();
 			if (!sdCard.equals(Environment.MEDIA_MOUNTED)) {
 				Log.i("MainActivity.onActivityResult", "sdCard not found");
@@ -123,7 +171,8 @@ public class MainActivity extends Activity {
 			((ImageView) findViewById(R.id.imageView1)).setImageBitmap(bitmap);
 		*/
 			
-			performCrop();
+//			performCrop();
+			
 		}
 		
 	}
@@ -137,9 +186,7 @@ public class MainActivity extends Activity {
 	}
 	
 	
-	/**
-     * Helper method to carry out crop operation
-     */
+/*	
     private void performCrop(){
     	//take care of exceptions
     	try {
@@ -181,7 +228,7 @@ public class MainActivity extends Activity {
     		Toast toast = Toast.makeText(this, errorMessage, Toast.LENGTH_SHORT);
     		toast.show();
     	}
-    }
+    }*/
 
 
 
