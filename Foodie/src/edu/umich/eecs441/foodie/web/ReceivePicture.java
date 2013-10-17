@@ -21,26 +21,31 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
+import android.provider.MediaStore.Images;
 import android.util.Log;
 
-public class ReceivePicture extends AsyncTask<String, Void, String>{
+public class ReceivePicture extends AsyncTask<String, Void, Bitmap>{
 
 	private final String TAG = "ReceivePicture.";
-	private final String urlPrefix = "http://so.meishi.cc/?q=";
-	private ProgressDialogApplicable progressDialogActivity;
+//	private final String urlPrefix = "http://so.meishi.cc/?q=";
+	private final String urlPrefix = "http://www.douguo.com/search/recipe/";
+	private ImageViewSettable imageViewSettableActivity;
 	private String mealName;
 	private String urlPath;
 	
-	public ReceivePicture (ProgressDialogApplicable activity) {
+	public ReceivePicture (ImageViewSettable activity) {
 		Log.i("ReceivePicture constructor", "enter");
-		progressDialogActivity = activity;
+		imageViewSettableActivity = activity;
 	}
 	
 	private String getHTML (String meal) throws Exception {
 		
 		Log.i(TAG + "getHTML", "enter");
 		mealName = meal;
+		
 		urlPath = urlPrefix + mealName;
 		URL url = new URL (urlPath);
 		
@@ -68,48 +73,54 @@ public class ReceivePicture extends AsyncTask<String, Void, String>{
   
 		inStream.close();
 		
-		return new String(data, "UTF-8");
-		/*HttpPost httpRequest = new HttpPost("http://so.meishi.cc");
-		List<NameValuePair> params = new ArrayList <NameValuePair>();
-		params.add(new BasicNameValuePair("q", meal));
-		HttpEntity httpEntity = new UrlEncodedFormEntity(params, "UTF-8");
-		httpRequest.setEntity(httpEntity);
-		HttpClient client = new DefaultHttpClient();
-		HttpResponse httpResponse = client.execute(httpRequest);
-		
-		return EntityUtils.toString(httpResponse.getEntity());*/
-  
-			
+		return new String(data, "UTF-8");			
 	}
+	
+	
+	// check if the picture doesnot exist
+	private Bitmap getPicture (String url) throws Exception{
+		URL picUrl = new URL (url);
+		return BitmapFactory.decodeStream((InputStream)picUrl.getContent());
+	}
+	
+	
 	protected void onPreExecute() {
 		Log.i(TAG + "onPreExecute", "enter!");
-		progressDialogActivity.startProgressDialog();
+		imageViewSettableActivity.startProgressDialog();
 	}
 	
 	@Override
-	protected String doInBackground(String... arg0) {
+	protected Bitmap doInBackground(String... arg0) {
 		// TODO Auto-generated method stub
 		try {
-			// get the document
-			/*Document doc = Jsoup.parse(getHTML(arg0[0]));
-			Element content = doc.getElementById("listtyle1_list");
+			Document doc = Jsoup.parse(getHTML(arg0[0]));
+		/*	Element content = doc.getElementById("listtyle1_list");
 			Elements links = content.getElementsByClass("cpimg");
+		*/
+			Elements links = doc.getElementsByClass("scoic mrl");
 			
-			String picContent = links.first().html();
+			Log.i(TAG + "doInBackground", "Links size: " + String.valueOf(links.size()));
 			
-			return picContent;*/
-			return getHTML(arg0[0]);
+			Log.i(TAG + "doInBackground", links.first().toString());
+			
+//			String picContent = links.first().absUrl("src");
+//			Log.i(TAG + "doInBackground", "path: " + picContent);
+//			return getPicture(picContent);
+//			return getHTML(arg0[0]);
+			return null;
+			
 			
 		} catch (Exception e) {
 			Log.i(TAG + "getPictureUri", "getHTML failed");
 			e.printStackTrace();
 		}
-		return "";
+		return null;
 	}
 	
-	protected void onPostExecute(String result) {
+	protected void onPostExecute(Bitmap result) {
 		Log.i(TAG + "onPostExecute", "enter!");
-		progressDialogActivity.dismissProgressDialog();
-		Log.i(TAG + "onPostExecute", "result: " + result.contains("*"));
+		imageViewSettableActivity.setImageView(result);
+		imageViewSettableActivity.dismissProgressDialog();	
+//		Log.i(TAG + "onPostExecute", "result: " + result);
 	}
 }

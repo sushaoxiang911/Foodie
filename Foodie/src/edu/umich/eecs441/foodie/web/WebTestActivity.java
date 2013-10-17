@@ -4,6 +4,7 @@ import com.example.foodie.R;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -11,14 +12,16 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 public class WebTestActivity extends Activity 
-							 implements ProgressDialogApplicable {
+							 implements ImageViewSettable {
 
 	private EditText searchBox;
 	private Button searchButton;
 	private ProgressDialog dialog;
+	private ImageView image;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -26,7 +29,7 @@ public class WebTestActivity extends Activity
 		setContentView (R.layout.activity_web_test);
 		searchBox = (EditText) this.findViewById(R.id.editText1);
 		searchButton = (Button) this.findViewById(R.id.button1);
-		
+		image = (ImageView) this.findViewById(R.id.imageView1);
 		
 		
 		searchButton.setOnClickListener(new OnClickListener () {	
@@ -60,6 +63,13 @@ public class WebTestActivity extends Activity
 	@Override
 	public void dismissProgressDialog() {
 		dialog.dismiss();
+	}
+
+
+	@Override
+	public void setImageView(Bitmap bm) {
+		// TODO Auto-generated method stub
+		image.setImageBitmap(bm);
 	}
 	
 	
