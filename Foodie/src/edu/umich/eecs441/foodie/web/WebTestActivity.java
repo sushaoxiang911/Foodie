@@ -27,12 +27,13 @@ public class WebTestActivity extends Activity
 		searchBox = (EditText) this.findViewById(R.id.editText1);
 		searchButton = (Button) this.findViewById(R.id.button1);
 		
-		final ReceivePicture rp = new ReceivePicture(this);
+		
 		
 		searchButton.setOnClickListener(new OnClickListener () {	
 			@Override
 			public void onClick(View arg0) {
 				String searchContent = searchBox.getText().toString();
+				ReceivePicture rp = new ReceivePicture(WebTestActivity.this);
 				rp.execute(searchContent);
 			}
 			

@@ -4,6 +4,22 @@ import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
+
+import org.apache.http.HttpEntity;
+import org.apache.http.HttpResponse;
+import org.apache.http.NameValuePair;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.entity.UrlEncodedFormEntity;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.message.BasicNameValuePair;
+import org.apache.http.util.EntityUtils;
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
+import org.jsoup.select.Elements;
 
 import android.os.AsyncTask;
 import android.util.Log;
@@ -34,7 +50,7 @@ public class ReceivePicture extends AsyncTask<String, Void, String>{
 		conn.setRequestMethod("GET");
 		conn.setConnectTimeout(5*1000);  
 		
-		Log.i(TAG + "getHTML", "URL: " + urlPath);
+		Log.i(TAG + "getHTML", "URL: " + url.getPath());
 		
 		InputStream inStream = conn.getInputStream();  
 	 
@@ -52,7 +68,16 @@ public class ReceivePicture extends AsyncTask<String, Void, String>{
   
 		inStream.close();
 		
-		return new String(data, "gb2312");
+		return new String(data, "UTF-8");
+		/*HttpPost httpRequest = new HttpPost("http://so.meishi.cc");
+		List<NameValuePair> params = new ArrayList <NameValuePair>();
+		params.add(new BasicNameValuePair("q", meal));
+		HttpEntity httpEntity = new UrlEncodedFormEntity(params, "UTF-8");
+		httpRequest.setEntity(httpEntity);
+		HttpClient client = new DefaultHttpClient();
+		HttpResponse httpResponse = client.execute(httpRequest);
+		
+		return EntityUtils.toString(httpResponse.getEntity());*/
   
 			
 	}
@@ -65,7 +90,16 @@ public class ReceivePicture extends AsyncTask<String, Void, String>{
 	protected String doInBackground(String... arg0) {
 		// TODO Auto-generated method stub
 		try {
+			// get the document
+			/*Document doc = Jsoup.parse(getHTML(arg0[0]));
+			Element content = doc.getElementById("listtyle1_list");
+			Elements links = content.getElementsByClass("cpimg");
+			
+			String picContent = links.first().html();
+			
+			return picContent;*/
 			return getHTML(arg0[0]);
+			
 		} catch (Exception e) {
 			Log.i(TAG + "getPictureUri", "getHTML failed");
 			e.printStackTrace();
@@ -76,6 +110,6 @@ public class ReceivePicture extends AsyncTask<String, Void, String>{
 	protected void onPostExecute(String result) {
 		Log.i(TAG + "onPostExecute", "enter!");
 		progressDialogActivity.dismissProgressDialog();
-		Log.i(TAG + "onPostExecute", "result: " + result);
+		Log.i(TAG + "onPostExecute", "result: " + result.contains("*"));
 	}
 }
