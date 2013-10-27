@@ -15,6 +15,7 @@ import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
+import org.apache.http.protocol.HTTP;
 import org.apache.http.util.EntityUtils;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -30,8 +31,8 @@ import android.util.Log;
 public class ReceivePicture extends AsyncTask<String, Void, Bitmap>{
 
 	private final String TAG = "ReceivePicture.";
-//	private final String urlPrefix = "http://so.meishi.cc/?q=";
-	private final String urlPrefix = "http://www.douguo.com/search/recipe/";
+	private final String urlPrefix = "http://so.meishi.cc/?q=";
+//	private final String urlPrefix = "http://www.douguo.com/search/recipe/";
 	private ImageViewSettable imageViewSettableActivity;
 	private String mealName;
 	private String urlPath;
@@ -43,7 +44,7 @@ public class ReceivePicture extends AsyncTask<String, Void, Bitmap>{
 	
 	private String getHTML (String meal) throws Exception {
 		
-		Log.i(TAG + "getHTML", "enter");
+	/*	Log.i(TAG + "getHTML", "enter");
 		mealName = meal;
 		
 		urlPath = urlPrefix + mealName;
@@ -73,7 +74,30 @@ public class ReceivePicture extends AsyncTask<String, Void, Bitmap>{
   
 		inStream.close();
 		
-		return new String(data, "UTF-8");			
+		return new String(data, "UTF-8");*/
+		
+		DefaultHttpClient httpClient = new DefaultHttpClient();
+		HttpPost post = new HttpPost("http://so.meishi.cc/");
+		
+		List<NameValuePair> pairs = new ArrayList<NameValuePair> ();
+		NameValuePair pair1 = new BasicNameValuePair("q", meal);
+		NameValuePair pair2 = new BasicNameValuePair("sort", "click");
+		
+		//TODO: when there is no result!
+		
+		pairs.add(pair1);
+		pairs.add(pair2);
+		HttpEntity entity = new UrlEncodedFormEntity(pairs, HTTP.UTF_8);
+		post.setEntity(entity);
+		
+		HttpResponse response = httpClient.execute(post);
+		
+		return EntityUtils.toString(response.getEntity());
+		
+		
+		
+		
+		
 	}
 	
 	
@@ -94,20 +118,20 @@ public class ReceivePicture extends AsyncTask<String, Void, Bitmap>{
 		// TODO Auto-generated method stub
 		try {
 			Document doc = Jsoup.parse(getHTML(arg0[0]));
-		/*	Element content = doc.getElementById("listtyle1_list");
+			Element content = doc.getElementById("listtyle1_list");
 			Elements links = content.getElementsByClass("cpimg");
-		*/
-			Elements links = doc.getElementsByClass("scoic mrl");
+		
+/*			Elements links = doc.getElementsByClass("scoic mrl");
 			
 			Log.i(TAG + "doInBackground", "Links size: " + String.valueOf(links.size()));
 			
 			Log.i(TAG + "doInBackground", links.first().toString());
-			
-//			String picContent = links.first().absUrl("src");
-//			Log.i(TAG + "doInBackground", "path: " + picContent);
-//			return getPicture(picContent);
+			*/
+			String picContent = links.first().absUrl("src");
+			Log.i(TAG + "doInBackground", "path: " + picContent);
+			return getPicture(picContent);
 //			return getHTML(arg0[0]);
-			return null;
+//			return null;
 			
 			
 		} catch (Exception e) {

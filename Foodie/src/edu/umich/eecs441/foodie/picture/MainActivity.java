@@ -37,6 +37,8 @@ import android.widget.Toast;
 // TODO try to use rectangle crop
 // TODO how to integrate it with our app, not that many activity transferring
 
+// TODO construct local file folder for foodie copy training data into the folder
+
 public class MainActivity extends Activity {
 
 	private Button button;
@@ -55,6 +57,7 @@ public class MainActivity extends Activity {
 
 			@Override
 			public void onClick(View arg0) {
+				
 				
 				File fos = null;
 				try {
@@ -93,10 +96,10 @@ public class MainActivity extends Activity {
 			  			//set crop properties
 			  			cropIntent.putExtra("crop", "true");
 			  			//indicate aspect of desired crop
-			  			cropIntent.putExtra("aspectX", 1);
+			  			cropIntent.putExtra("aspectX", 7);
 			  			cropIntent.putExtra("aspectY", 1);
 			  			//indicate output X and Y
-			  			cropIntent.putExtra("outputX", 256);
+			  			cropIntent.putExtra("outputX", 1792);
 			  			cropIntent.putExtra("outputY", 256);
 			  			//retrieve data on return
 			  			cropIntent.putExtra("return-data", true);
@@ -132,7 +135,7 @@ public class MainActivity extends Activity {
 			// 
 */		
 			/*String sdStatus = Environment.getExternalStorageState();  
-			if (!sdStatus.equals(Environment.MEDIA_MOUNTED)) { // ¼ì²âsdÊÇ·ñ¿ÉÓÃ  
+			if (!sdStatus.equals(Environment.MEDIA_MOUNTED)) { // ï¿½ï¿½ï¿½sdï¿½Ç·ï¿½ï¿½ï¿½ï¿½  
 				Log.i("TestFile",  
 						"SD card is not avaiable/writeable right now.");  
 				return;  
@@ -141,18 +144,18 @@ public class MainActivity extends Activity {
 			Log.i("@@@", name);
 			Toast.makeText(this, name, Toast.LENGTH_LONG).show();  
 			Bundle bundle = data.getExtras();  
-			Bitmap bitmap = (Bitmap) bundle.get("data");// »ñÈ¡Ïà»ú·µ»ØµÄÊý¾Ý£¬²¢×ª»»ÎªBitmapÍ¼Æ¬¸ñÊ½  
+			Bitmap bitmap = (Bitmap) bundle.get("data");// ï¿½ï¿½È¡ï¿½ï¿½ï¿½Øµï¿½ï¿½ï¿½Ý£ï¿½ï¿½ï¿½×ªï¿½ï¿½ÎªBitmapÍ¼Æ¬ï¿½ï¿½Ê½  
 
 			FileOutputStream b = null;  
-			//???????????????????????????????ÎªÊ²Ã´²»ÄÜÖ±½Ó±£´æÔÚÏµÍ³Ïà²áÎ»ÖÃÄØ£¿£¿£¿£¿£¿£¿£¿£¿£¿£¿£¿£¿  
+			//???????????????????????????????ÎªÊ²Ã´ï¿½ï¿½ï¿½ï¿½Ö±ï¿½Ó±ï¿½ï¿½ï¿½ï¿½ï¿½ÏµÍ³ï¿½ï¿½ï¿½Î»ï¿½ï¿½ï¿½Ø£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½  
 			File file = new File(Environment.getExternalStorageDirectory() + "/myImage/");
 			Log.i("path", Environment.getExternalStorageDirectory() + "/myImage/");
-			file.mkdirs();// ´´½¨ÎÄ¼þ¼Ð  
+			file.mkdirs();// ï¿½ï¿½ï¿½ï¿½ï¿½Ä¼ï¿½ï¿½ï¿½  
 			String fileName = Environment.getExternalStorageDirectory() + "/myImage/"+name;  
 
 			try {  
 					b = new FileOutputStream(fileName);  
-					bitmap.compress(Bitmap.CompressFormat.JPEG, 100, b);// °ÑÊý¾ÝÐ´ÈëÎÄ¼þ  
+					bitmap.compress(Bitmap.CompressFormat.JPEG, 100, b);// ï¿½ï¿½ï¿½ï¿½ï¿½Ð´ï¿½ï¿½ï¿½Ä¼ï¿½  
 			} catch (FileNotFoundException e) {  
 				e.printStackTrace();  
 			} finally {  
@@ -166,7 +169,7 @@ public class MainActivity extends Activity {
 			
 */
 /*			Bundle bundle = data.getExtras();  
-			Bitmap bitmap = (Bitmap) bundle.get("data");// »ñÈ¡Ïà»ú·µ»ØµÄÊý¾Ý£¬²¢×ª»»ÎªBitmapÍ¼Æ¬¸ñÊ½  
+			Bitmap bitmap = (Bitmap) bundle.get("data");// ï¿½ï¿½È¡ï¿½ï¿½ï¿½Øµï¿½ï¿½ï¿½Ý£ï¿½ï¿½ï¿½×ªï¿½ï¿½ÎªBitmapÍ¼Æ¬ï¿½ï¿½Ê½  
 
 			((ImageView) findViewById(R.id.imageView1)).setImageBitmap(bitmap);
 		*/
