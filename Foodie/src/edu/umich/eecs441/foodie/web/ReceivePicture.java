@@ -33,49 +33,16 @@ public class ReceivePicture extends AsyncTask<String, Void, Bitmap>{
 	private final String TAG = "ReceivePicture.";
 	private final String urlPrefix = "http://so.meishi.cc/?q=";
 //	private final String urlPrefix = "http://www.douguo.com/search/recipe/";
-	private ImageViewSettable imageViewSettableActivity;
-	private String mealName;
-	private String urlPath;
+	private ContentSettable contentSettableActivity;
 	
-	public ReceivePicture (ImageViewSettable activity) {
+	public ReceivePicture (ContentSettable activity) {
 		Log.i("ReceivePicture constructor", "enter");
-		imageViewSettableActivity = activity;
+		contentSettableActivity = activity;
 	}
 	
 	private String getHTML (String meal) throws Exception {
 		
-	/*	Log.i(TAG + "getHTML", "enter");
-		mealName = meal;
-		
-		urlPath = urlPrefix + mealName;
-		URL url = new URL (urlPath);
-		
-		HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-		
-		// GET Method
-		conn.setRequestMethod("GET");
-		conn.setConnectTimeout(5*1000);  
-		
-		Log.i(TAG + "getHTML", "URL: " + url.getPath());
-		
-		InputStream inStream = conn.getInputStream();  
-	 
-		ByteArrayOutputStream outStream = new ByteArrayOutputStream();  
-		byte[] buffer = new byte[1024];  
-		int len = 0;  
-  
-		while( (len = inStream.read(buffer)) !=-1 ){  
-           outStream.write(buffer, 0, len);  
-		}  
-  
-		byte[] data = outStream.toByteArray();
-  
-		outStream.close();  
-  
-		inStream.close();
-		
-		return new String(data, "UTF-8");*/
-		
+
 		DefaultHttpClient httpClient = new DefaultHttpClient();
 		HttpPost post = new HttpPost("http://so.meishi.cc/");
 		
@@ -83,7 +50,7 @@ public class ReceivePicture extends AsyncTask<String, Void, Bitmap>{
 		NameValuePair pair1 = new BasicNameValuePair("q", meal);
 		NameValuePair pair2 = new BasicNameValuePair("sort", "click");
 		
-		//TODO: when there is no result!
+		
 		
 		pairs.add(pair1);
 		pairs.add(pair2);
@@ -110,17 +77,21 @@ public class ReceivePicture extends AsyncTask<String, Void, Bitmap>{
 	
 	protected void onPreExecute() {
 		Log.i(TAG + "onPreExecute", "enter!");
-		imageViewSettableActivity.startProgressDialog();
+		contentSettableActivity.startProgressDialog();
 	}
 	
 	@Override
 	protected Bitmap doInBackground(String... arg0) {
-		// TODO Auto-generated method stub
 		try {
 			Document doc = Jsoup.parse(getHTML(arg0[0]));
 			Element content = doc.getElementById("listtyle1_list");
 			Elements links = content.getElementsByClass("cpimg");
-		
+			if (links.size() == 0) {
+				//TODO: when there is no result!
+				Log.i(TAG + "doInBackground", "No result found");
+				
+			}
+			Log.i(TAG + "onPreExecute", String.valueOf(links.size()));
 /*			Elements links = doc.getElementsByClass("scoic mrl");
 			
 			Log.i(TAG + "doInBackground", "Links size: " + String.valueOf(links.size()));
@@ -143,8 +114,8 @@ public class ReceivePicture extends AsyncTask<String, Void, Bitmap>{
 	
 	protected void onPostExecute(Bitmap result) {
 		Log.i(TAG + "onPostExecute", "enter!");
-		imageViewSettableActivity.setImageView(result);
-		imageViewSettableActivity.dismissProgressDialog();	
+		contentSettableActivity.setImageView(result);
+		contentSettableActivity.dismissProgressDialog();	
 //		Log.i(TAG + "onPostExecute", "result: " + result);
 	}
 }

@@ -16,12 +16,13 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 public class WebTestActivity extends Activity 
-							 implements ImageViewSettable {
+							 implements ContentSettable {
 
 	private EditText searchBox;
 	private Button searchButton;
 	private ProgressDialog dialog;
-	private ImageView image;
+//	private ImageView image;
+	private TextView text;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -29,15 +30,25 @@ public class WebTestActivity extends Activity
 		setContentView (R.layout.activity_web_test);
 		searchBox = (EditText) this.findViewById(R.id.editText1);
 		searchButton = (Button) this.findViewById(R.id.button1);
-		image = (ImageView) this.findViewById(R.id.imageView1);
+		text = (TextView) this.findViewById(R.id.textView1);
 		
 		
 		searchButton.setOnClickListener(new OnClickListener () {	
 			@Override
 			public void onClick(View arg0) {
 				String searchContent = searchBox.getText().toString();
-				ReceivePicture rp = new ReceivePicture(WebTestActivity.this);
-				rp.execute(searchContent);
+//				ReceivePicture rp = new ReceivePicture(WebTestActivity.this);
+//				rp.execute(searchContent);
+				ReceiveTranslation rt = new ReceiveTranslation(WebTestActivity.this);
+				try {
+					rt.execute(searchContent);
+				} catch (Exception e) {
+					Log.i("error", "");
+					e.printStackTrace();
+				}
+				
+				
+				
 			}
 			
 		});
@@ -69,7 +80,13 @@ public class WebTestActivity extends Activity
 	@Override
 	public void setImageView(Bitmap bm) {
 		// TODO Auto-generated method stub
-		image.setImageBitmap(bm);
+//		image.setImageBitmap(bm);
+	}
+
+
+	@Override
+	public void setText(String string) {
+		text.setText(string);
 	}
 	
 	

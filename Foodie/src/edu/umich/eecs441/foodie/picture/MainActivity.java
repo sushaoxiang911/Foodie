@@ -10,11 +10,14 @@ import java.util.Locale;
 
 import com.example.foodie.R;
 
+import edu.umich.eecs441.foodie.web.ContentSettable;
+import edu.umich.eecs441.foodie.web.ReceivePicture;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -39,19 +42,26 @@ import android.widget.Toast;
 
 // TODO construct local file folder for foodie copy training data into the folder
 
-public class MainActivity extends Activity {
+public class MainActivity extends Activity 
+						  implements ContentSettable{
 
 	private Button button;
 	final private int CAMERA = 1;
 	final private int CROP = 2;
-	
+	private ProgressDialog dialog;
+	private ImageView image;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 		
+		image = (ImageView) this.findViewById(R.id.imageView1);
+		
 		button = (Button)this.findViewById(R.id.button1);
+		
+		
+		
 		
 		button.setOnClickListener(new OnClickListener() {
 
@@ -117,65 +127,14 @@ public class MainActivity extends Activity {
 				// get the cropped map 
 				Bitmap photoMap = extras.getParcelable("data");
 				// reference to picture view
-				((ImageView) findViewById(R.id.imageView1)).setImageBitmap(photoMap);
-			}
 			
+				String mealName = PictureScanning.scanPicture(photoMap);
+				Log.i("MainActivity get the meal name", mealName);
+				ReceivePicture receivePicture = new ReceivePicture(this);
+				receivePicture.execute(mealName);
+				
 			
-			
-	/*		
-			File bb = new File(Environment.getExternalStorageDirectory().getAbsoluteFile() + File.pathSeparator + "orc.jpg");
-			
-	
-			String sdCard = Environment.getExternalStorageState();
-			if (!sdCard.equals(Environment.MEDIA_MOUNTED)) {
-				Log.i("MainActivity.onActivityResult", "sdCard not found");
-				return;
-			}
-			
-			// 
-*/		
-			/*String sdStatus = Environment.getExternalStorageState();  
-			if (!sdStatus.equals(Environment.MEDIA_MOUNTED)) { // ���sd�Ƿ����  
-				Log.i("TestFile",  
-						"SD card is not avaiable/writeable right now.");  
-				return;  
-			}  
-			String name = new DateFormat().format("yyyyMMdd_hhmmss",Calendar.getInstance(Locale.US)) + ".jpg";     
-			Log.i("@@@", name);
-			Toast.makeText(this, name, Toast.LENGTH_LONG).show();  
-			Bundle bundle = data.getExtras();  
-			Bitmap bitmap = (Bitmap) bundle.get("data");// ��ȡ���ص���ݣ���ת��ΪBitmapͼƬ��ʽ  
-
-			FileOutputStream b = null;  
-			//???????????????????????????????Ϊʲô����ֱ�ӱ�����ϵͳ���λ���أ�����������������������  
-			File file = new File(Environment.getExternalStorageDirectory() + "/myImage/");
-			Log.i("path", Environment.getExternalStorageDirectory() + "/myImage/");
-			file.mkdirs();// �����ļ���  
-			String fileName = Environment.getExternalStorageDirectory() + "/myImage/"+name;  
-
-			try {  
-					b = new FileOutputStream(fileName);  
-					bitmap.compress(Bitmap.CompressFormat.JPEG, 100, b);// �����д���ļ�  
-			} catch (FileNotFoundException e) {  
-				e.printStackTrace();  
-			} finally {  
-				try {  
-					b.flush();  
-					b.close();  
-				} catch (IOException e) {  
-					e.printStackTrace();  
-				}  
-			}  
-			
-*/
-/*			Bundle bundle = data.getExtras();  
-			Bitmap bitmap = (Bitmap) bundle.get("data");// ��ȡ���ص���ݣ���ת��ΪBitmapͼƬ��ʽ  
-
-			((ImageView) findViewById(R.id.imageView1)).setImageBitmap(bitmap);
-		*/
-			
-//			performCrop();
-			
+			}		
 		}
 		
 	}
@@ -187,52 +146,30 @@ public class MainActivity extends Activity {
 		getMenuInflater().inflate(R.menu.main, menu);
 		return true;
 	}
+
+
+	@Override
+	public void startProgressDialog() {
+		dialog = ProgressDialog.show(MainActivity.this, "Waiting...", "Obtaining Image");
+	}
+
+
+	@Override
+	public void dismissProgressDialog() {
+		dialog.dismiss();
+	}
+
+
+	@Override
+	public void setImageView(Bitmap bm) {
+		// TODO Auto-generated method stub
+		image.setImageBitmap(bm);
+	}
+
+	@Override
+	public void setText(String string) {
+		// TODO Auto-generated method stub
+		
+	}
 	
-	
-/*	
-    private void performCrop(){
-    	//take care of exceptions
-    	try {
-    		
-    		Log.i("performCrop", "go into the function");
-    		
-    		File bb = new File ("/mnt/sdcard/ocr1.jpg");
-    		
-    		//call the standard crop action intent (the user device may not support it)
-	    	Intent cropIntent = new Intent("com.android.camera.action.CROP"); 
-	    	//indicate image type and Uri
-	    	cropIntent.setDataAndType(Uri.fromFile(bb), "image/*");
-	    	//set crop properties
-	    	cropIntent.putExtra("crop", "true");
-	    	//indicate aspect of desired crop
-	    	cropIntent.putExtra("aspectX", 1);
-	    	cropIntent.putExtra("aspectY", 1);
-	    	//indicate output X and Y
-	    	cropIntent.putExtra("outputX", 256);
-	    	cropIntent.putExtra("outputY", 256);
-	    	//retrieve data on return
-	    	cropIntent.putExtra("return-data", true);
-	    	//start the activity - we handle returning in onActivityResult
-	        //startActivityForResult(cropIntent, PIC_CROP);  
-	    	//get the returned data
-			Bundle extras = cropIntent.getExtras();
-			//get the cropped bitmap
-			Bitmap thePic = extras.getParcelable("cropIntent");
-			Log.i("performCrop", "the pic!=null?: "+String.valueOf(thePic!=null));
-			//retrieve a reference to the ImageView
-			ImageView picView = (ImageView)findViewById(R.id.imageView1);
-			//display the returned cropped image
-			picView.setImageBitmap(thePic);
-    	}
-    	//respond to users whose devices do not support the crop action
-    	catch(ActivityNotFoundException anfe){
-    		//display an error message
-    		String errorMessage = "Whoops - your device doesn't support the crop action!";
-    		Toast toast = Toast.makeText(this, errorMessage, Toast.LENGTH_SHORT);
-    		toast.show();
-    	}
-    }*/
-
-
-
 }
