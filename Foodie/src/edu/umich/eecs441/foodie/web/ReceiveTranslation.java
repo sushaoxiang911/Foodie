@@ -53,6 +53,11 @@ public class ReceiveTranslation extends AsyncTask <String, Void, String>{
 		
 		String result = "";
 		
+		if (YouDaoSearchContent == null) {
+			Log.i(TAG + "Translate", "YouDaoSearchContent is null");
+			return new String ("result not found!");
+		}
+		
 		String YouDaoUrl = getUrl(YouDaoSearchContent);
 		
 		// get method
@@ -87,7 +92,10 @@ public class ReceiveTranslation extends AsyncTask <String, Void, String>{
 				}
 				
 				Log.i(TAG + "Translate", "basic number" + basic.getLength());
-
+				
+				// TODO: if there is no basic, go web tag
+				
+				
 				Element basicElement = (Element)basic.item(0);
 				NodeList explanations = ((Element)basicElement.getElementsByTagName("explains").item(0)).getElementsByTagName("ex");
 				
@@ -103,7 +111,8 @@ public class ReceiveTranslation extends AsyncTask <String, Void, String>{
 						if (child instanceof CharacterData) {
 							CharacterData cd = (CharacterData) child;
 							result += cd.getData();
-							result += ",";
+							result += "\n";
+							Log.i(TAG + "Translate", "result = " + result);
 						}
 					}
 				}	
@@ -134,6 +143,7 @@ public class ReceiveTranslation extends AsyncTask <String, Void, String>{
 	
 	protected void onPostExecute(String result) {
 		contentSettableActivity.setText(result);
+		contentSettableActivity.dismissProgressDialog();
 		Log.i(TAG + "onPostExecute", "finish");
 	}
 	
