@@ -29,7 +29,7 @@
                 <LinearLayout
                    android:layout_width="match_parent"
                    android:layout_height="match_parent"
-                   android:layout_weight="2.13" 
+                   android:layout_weight="2.03" 
                    android:orientation="horizontal">
 
                    <Button
@@ -43,7 +43,7 @@
                  <LinearLayout
                        android:layout_width="match_parent"
                        android:layout_height="match_parent"
-                       android:layout_weight="2.13" 
+                       android:layout_weight="2.2" 
                        android:orientation="horizontal">
                  </LinearLayout>
                 
@@ -65,7 +65,7 @@
                  <LinearLayout
                        android:layout_width="match_parent"
                        android:layout_height="match_parent"
-                       android:layout_weight="2.3" 
+                       android:layout_weight="2.2" 
                        android:orientation="horizontal">
                  </LinearLayout>
                 
@@ -79,9 +79,6 @@
                        android:layout_height="match_parent"
                        android:background="@drawable/bookmark1" />
                 </LinearLayout>
-                
-               
-                
                 
                
          </LinearLayout>

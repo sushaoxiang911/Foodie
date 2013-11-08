@@ -59,6 +59,12 @@ public class SearchResultActivity extends Activity {
 		this.startActivity(intent);
 	}
 
+
+	@Override
+	public void onBackPressed() {
+		
+	}
+	
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.

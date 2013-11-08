@@ -61,6 +61,12 @@ public class MainActivity extends Activity {
 		Intent intent = new Intent(view.getContext(), BookmarkActivity.class);
 		this.startActivity(intent);
 	}
+	
+
+	@Override
+	public void onBackPressed() {
+		
+	}
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
