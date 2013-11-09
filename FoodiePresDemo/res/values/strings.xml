@@ -3,6 +3,9 @@
 
     <string name="app_name">FoodiePresDemo</string>
     <string name="action_settings">Settings</string>
-    <string name="hello_world">Hello world!</string>
+    
+    <string name="confirm">Confirm</string>
+    <string name="search">Search</string>
+    <string name="recapture">Recapture</string>
 
 </resources>

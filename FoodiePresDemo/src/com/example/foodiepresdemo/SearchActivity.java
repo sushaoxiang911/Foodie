@@ -7,10 +7,16 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+
+
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.Matrix;
 import android.hardware.Camera;
+import android.hardware.Camera.AutoFocusCallback;
 import android.hardware.Camera.PictureCallback;
 import android.os.Bundle;
 import android.os.Environment;
@@ -22,18 +28,28 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.FrameLayout;
+import android.widget.ImageView;
 
 public class SearchActivity extends Activity {
 	private Button homeButton;
 	private Button searchButton;
 	private Button bookMarkButton;
+
 	
 	// ----
 	public static final int MEDIA_TYPE_IMAGE = 1;
 	public static final int MEDIA_TYPE_VIDEO = 2;
 	protected static final String TAG = null;
+	
+	private Button captureButton;
+	
 	private Camera mCamera;
 	private CameraPreview mPreview;
+	//private ImageView resultPreview;
+	private int xLeft,
+				yTop,
+				xWidth,
+				yHeight;
 	// ----
 	
 	@Override
@@ -43,27 +59,33 @@ public class SearchActivity extends Activity {
 		
 		// -------
 		// Create an instance ofCamera
-				mCamera = getCameraInstance();
-				
-				// Create our Preview viewand set it as the content of our activity.
-				mPreview = new CameraPreview(this, mCamera);
-				
-				// TODO: enable focussing
-				// mPreview.setFocusable(true);  
-				// mPreview.setFocusableInTouchMode(true); 
-				
-			   
-				FrameLayout preview = (FrameLayout) findViewById(R.id.camera_preview);
-				preview.addView(mPreview);
-				Button captureButton = (Button) findViewById(R.id.button_capture);
-				captureButton.setOnClickListener(new View.OnClickListener() {
-					@Override
-					public void onClick(View v) {
-					// get an imagefrom the camera
-					
-					mCamera.takePicture(null, null, mPicture);
-					}
-				});
+		mCamera = getCameraInstance();
+		
+		// Create our Preview view and set it as the content of our activity.
+		mPreview = new CameraPreview(this, mCamera);		
+	   
+		FrameLayout preview = (FrameLayout) findViewById(R.id.camera_preview);
+		preview.addView(mPreview);
+		captureButton = (Button) findViewById(R.id.button_capture);
+		captureButton.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				captureButton.setBackground(getResources().getDrawable(R.drawable.bigcamera2));
+				Log.i("cameratest", "onTake");
+				AutoFocusCallback myAutoFocusCallback = new AutoFocusCallback(){
+					  @Override
+					  public void onAutoFocus(boolean arg0, Camera arg1) {
+						  // TODO Auto-generated method stub
+						  Log.i("cameratest", "onFocus");
+						  mCamera.takePicture(null, null, mPicture);
+					  }
+				};
+				mCamera.autoFocus(myAutoFocusCallback);
+			}
+		});
+		
+		
+		//resultPreview = (ImageView) findViewById(R.id.result_preview);
 		 
 		 // ------
 		
@@ -106,19 +128,21 @@ public class SearchActivity extends Activity {
 		Intent intent = new Intent(view.getContext(), MainActivity.class);
 		this.startActivity(intent);
 	}
-//---------------
-	/** A safe way to get an instance of theCamera object. */
+	//---------------
+	/* A safe way to get an instance of theCamera object. */
 	public static Camera getCameraInstance() {
 		Camera c = null;
 		try {
-			c = Camera.open(); // attempt to get a Camera instance
+			c = Camera.open(); 
 		} catch (Exception e) {
-		// Camera is notavailable (in use or does not exist)
+			// Camera is not available (in use or does not exist)
 		}
-		return c; // returns nullif camera is unavailable
+		return c;  
 	}
 	
-	/** A basic Camera preview class */
+	
+	
+	/* A basic Camera preview class */
 	public class CameraPreview extends SurfaceView implements
 		SurfaceHolder.Callback {
 		private SurfaceHolder mHolder;
@@ -129,57 +153,60 @@ public class SearchActivity extends Activity {
 			mCamera = camera;
 			
 			// Install aSurfaceHolder.Callback so we get notified when the
-			// underlyingsurface is created and destroyed.
+			// underlying surface is created and destroyed.
 			mHolder = getHolder();
 			mHolder.addCallback(this);
-			// deprecatedsetting, but required on Android versions prior to 3.0
-			mHolder.setType(SurfaceHolder.SURFACE_TYPE_PUSH_BUFFERS);
 		}
 	
 		public void surfaceCreated(SurfaceHolder holder) {
-		// The Surfacehas been created, now tell the camera where to draw
-		// the preview.
+			// The Surface has been created, now tell the camera where to draw
+			// the preview.
 			try {
-			mCamera.setPreviewDisplay(holder);
-			mCamera.setDisplayOrientation(90);
-			mCamera.startPreview();
-			
-			//
+				mCamera.setPreviewDisplay(holder);
+				mCamera.setDisplayOrientation(90);
+				mCamera.startPreview();
 			} catch (IOException e) {
-			Log.d(TAG, "Errorsetting camera preview: " + e.getMessage());
+				Log.d(TAG, "Errorsetting camera preview: " + e.getMessage());
 			}
 		}
 	
 		public void surfaceDestroyed(SurfaceHolder holder) {
-		// empty. Takecare of releasing the Camera preview in your
-		// activity.
+			//Take care of releasing the Camera preview
 		}
 		
 		public void surfaceChanged(SurfaceHolder holder, int format, int w,
 		int h) {
-		// If yourpreview can change or rotate, take care of those events
-		// here.
-		// Make sure tostop the preview before resizing or reformatting it.
+			// If your preview can change or rotate, take care of those events
+			// here.
+			// Make sure to stop the preview before resizing or reformatting it.
 		
 			if (mHolder.getSurface() == null) {
-			// previewsurface does not exist
+				// preview surface does not exist
 				return;
 			}
 		
-		// stop previewbefore making changes
+			// stop preview before making changes
 			try {
 				mCamera.stopPreview();
 			} catch (Exception e) {
-			// ignore: triedto stop a non-existent preview
+				// ignore: tried to stop a non-existent preview
 			}
 		
-		// set previewsize and make any resize, rotate or
-		// reformattingchanges here
+			// set preview size and make any resize, rotate or
+			// reformatting changes here
 		
-		// start previewwith new settings
+			// start preview with new settings
 			try {
+				// set parameters
 				mCamera.setPreviewDisplay(mHolder);
 				mCamera.setDisplayOrientation(90);
+				Camera.Parameters para = mCamera.getParameters();
+				para.setAntibanding(Camera.Parameters.ANTIBANDING_AUTO);
+		        para.setWhiteBalance(Camera.Parameters.WHITE_BALANCE_AUTO);
+		        para.setFocusMode(Camera.Parameters.FOCUS_MODE_CONTINUOUS_PICTURE);
+		        para.setFlashMode(Camera.Parameters.FLASH_MODE_AUTO);
+		        para.setColorEffect(Camera.Parameters.EFFECT_NONE);
+		        mCamera.setParameters(para);
 				mCamera.startPreview();
 			} catch (Exception e) {
 				Log.d(TAG, "Errorstarting camera preview: " + e.getMessage());
@@ -189,90 +216,78 @@ public class SearchActivity extends Activity {
 		
 		private PictureCallback mPicture = new PictureCallback() {
 		
-		@Override
-		public void onPictureTaken(byte[] data, Camera camera) {
+			@Override
+			public void onPictureTaken(byte[] data, Camera camera) {
 		
-			File pictureFile = getOutputMediaFile(MEDIA_TYPE_IMAGE);
-			if (pictureFile == null) {
-			
-			return;
-			}
-		
-			try {
-				FileOutputStream fos = new FileOutputStream(pictureFile);
-				fos.write(data);
-				fos.close();
-				Log.i("cameratest", "pictureFiledata=" + data.length);
-			} catch (FileNotFoundException e) {
-				Log.i("cameratest", "File notfound: " + e.getMessage());
-			} catch (IOException e) {
-				Log.i("cameratest", "Erroraccessing file: " + e.getMessage());
-			}
-		}
-	};
-	
-	private static File getOutputMediaFile(int type) {
-		// To be safe, you shouldcheck that the SDCard is mounted
-		// usingEnvironment.getExternalStorageState() before doing this.
-		
-		File mediaStorageDir = new File(
-		Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES),
-		"MyCameraApp");
-		// This location works bestif you want the created images to be shared
-		// between applications andpersist after your app has been uninstalled.
-		
-		// Create the storagedirectory if it does not exist
-		if (!mediaStorageDir.exists()) {
-			if (!mediaStorageDir.mkdirs()) {
-				Log.d("MyCameraApp", "failed tocreate directory");
-				return null;
-			}
-		}
-		
-		// Create a media file name
-		String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss")
-		.format(new Date());
-		File mediaFile;
-		if (type == MEDIA_TYPE_IMAGE) {
-			mediaFile = new File(mediaStorageDir.getPath() + File.separator
-			+ "IMG_" + timeStamp + ".jpg");
-		} else if (type == MEDIA_TYPE_VIDEO) {
-			mediaFile = new File(mediaStorageDir.getPath() + File.separator
-			+ "VID_" + timeStamp + ".mp4");
-		} else {
-			return null;
-		}
-		return mediaFile;
-	}
-	
-
-	@Override
-	public void onBackPressed() {
-		
-	}
-
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.main, menu);
-		return true;
-	}
+				Bitmap raw = 
+					BitmapFactory.decodeByteArray(data, 0, data.length); 
+				
+				// Setting post rotate to 90
+                Matrix mtx = new Matrix();
+                mtx.postRotate(90);
+                Bitmap bitmapPicture = 
+                	Bitmap.createBitmap(raw, 0, 0, raw.getWidth(), raw.getHeight(), mtx, true);
+                Log.i("cameratest", "rawWidth" + bitmapPicture.getWidth());
+				Log.i("cameratest", "rawHeight" + bitmapPicture.getHeight());
+                
+				ImageView viewT = (ImageView) findViewById(R.id.box_preview);
+				FrameLayout cameraT = (FrameLayout) findViewById(R.id.camera_preview);
+				double ratioX = (double)bitmapPicture.getWidth() / cameraT.getWidth();
+				double ratioY = (double)bitmapPicture.getHeight() / cameraT.getHeight();
+				
+				Log.i("cameratest", "xOriginal" + cameraT.getWidth());
+				Log.i("cameratest", "yOriginal" + cameraT.getHeight());
+				Log.i("cameratest", "xRatio" + ratioX);
+				Log.i("cameratest", "yRatio" + ratioY);
+				
+				xLeft = (int)(viewT.getLeft() * ratioX);
+				yTop = (int)(viewT.getTop() * ratioY);
+				xWidth = (int)(viewT.getWidth() * ratioX);
+				yHeight = (int)(viewT.getHeight() * ratioY);
+				
+				Log.i("cameratest", "xleft" + xLeft);
+				Log.i("cameratest", "yTop" + yTop);
+				Log.i("cameratest", "xWidth" + xWidth);
+				Log.i("cameratest", "yHeight" + yHeight);
+				Bitmap croppedBitmap = 
+					Bitmap.createBitmap(bitmapPicture, xLeft, yTop, xWidth, yHeight);
+				//visualize image DELETED LATER
+				//resultPreview.setImageBitmap(croppedBitmap);
+				
+				Log.i("onPictureTaken", "Ready to new intent");
+				Intent intent = new Intent(SearchActivity.this, SearchResultActivity.class);
+				intent.putExtra("croppedBitmap", croppedBitmap);
+				startActivity(intent);
+				
+			}	
+		};
 	
 	@Override
 	protected void onStop() {
 		Log.i("cameratest", "onStop");
-		super.onStop(); // Always callthe superclass method first
+		super.onStop(); // Always call the superclass method first
 	}
+	
+	
 	
 	@Override
 	public void onPause() {
-		super.onPause(); // Alwayscall the superclass method first
 		Log.i("cameratest", "onPause");
-		// Release the Camera becausewe don't need it when paused
-		// and other activities mightneed to use it.
+		super.onPause(); // Always call the superclass method first
+		// Release the Camera because we don't need it when paused
+		// and other activities might need to use it.
 		if (mCamera != null) {
 			mCamera.release();
 			mCamera = null;
 		}
 	}
+
+	//-------------
+	
+	// disable the back button
+	@Override
+	public void onBackPressed() {
+		
+	}
+
 }

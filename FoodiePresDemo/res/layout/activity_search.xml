@@ -1,43 +1,157 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
    
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
+   
     android:background="@drawable/background"
     tools:context=".MainActivity" >
 
    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
         android:orientation="vertical"
-        android:layout_weight="13" >
+        android:layout_weight="11" >
         
-         <LinearLayout
-               android:layout_width="match_parent"
-               android:layout_height="match_parent"
-               android:layout_weight="1.5"
-               android:orientation="vertical" >
+         <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1.5"
+            android:orientation="vertical" >
                 
-                <FrameLayout
-			        android:id="@+id/camera_preview"
-			        android:layout_width="fill_parent"
-			        android:layout_height="fill_parent"
-			        android:layout_weight="1"
-			    />
+        <FrameLayout
+            android:id="@+id/camera_preview"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+        />    
+        
+        
+        <LinearLayout
+               android:layout_width="fill_parent"
+               android:layout_height="fill_parent"
+               android:orientation="vertical">
+            
+            <LinearLayout
+                 android:layout_width="match_parent"
+                 android:layout_height="match_parent"
+                 android:layout_weight="1" >
+          
+                 
+                 <LinearLayout
+	                 android:layout_width="match_parent"
+	                 android:layout_height="match_parent"
+	                 android:layout_weight="0.6" >
+                 </LinearLayout>
+                
+                 <LinearLayout
+                   android:layout_width="match_parent"
+                   android:layout_height="wrap_content"
+                   android:layout_weight="0.2" 
+                   android:orientation="vertical">
+                   
+                      <LinearLayout
+	                     android:layout_width="match_parent"
+	                     android:layout_height="match_parent"
+	                     android:layout_weight="4"
+	                     android:orientation="vertical" 
+	                     android:background="@drawable/nothing">
+                      </LinearLayout>
+                     
+                       <LinearLayout
+	                         android:layout_width="match_parent"
+	                         android:layout_height="match_parent"
+	                         android:layout_weight="3"
+	                         android:orientation="vertical" 
+	                         android:background="@drawable/nothing">
 
-			    <Button
-			        android:id="@+id/button_capture"
-			        android:text="Capture"
-			        android:layout_width="wrap_content"
-			        android:layout_height="wrap_content"
-			        android:layout_gravity="center"
-			    />
-			               
-             
-         </LinearLayout>
+                         <ImageView
+                             android:id="@+id/box_preview"
+                             android:layout_width="wrap_content"
+                             android:layout_height="wrap_content"
+                             android:layout_weight="1"
+                             android:background="@drawable/box" />
+
+                      </LinearLayout>
+                    
+                     <LinearLayout
+	                     android:layout_width="match_parent"
+	                     android:layout_height="match_parent"
+	                     android:layout_weight="0.8"
+	                     android:orientation="vertical" 
+	                     android:background="@drawable/nothing">
+                     </LinearLayout>
+                     
+                 </LinearLayout>
+                 
+                 
+                 <LinearLayout
+	                 android:layout_width="match_parent"
+	                 android:layout_height="match_parent"
+	                 android:layout_weight="0.6" >
+                 </LinearLayout>
+                
+            </LinearLayout>
+    
+            <LinearLayout
+                 android:layout_width="match_parent"
+                 android:layout_height="match_parent"
+                 android:layout_weight="1" >
+              
+               
+                <LinearLayout
+                     android:layout_width="match_parent"
+                     android:layout_height="match_parent"
+                     android:layout_weight="2.2"> 
+                </LinearLayout>
+               
+                <LinearLayout
+                     android:layout_width="wrap_content"
+                     android:layout_height="wrap_content"
+                     android:layout_weight="1"
+                     android:orientation="vertical"> 
+                     
+                     <LinearLayout
+	                     android:layout_width="match_parent"
+	                     android:layout_height="match_parent"
+	                     android:layout_weight="2.5"
+	                     android:background="@drawable/nothing"
+	                     android:orientation="vertical"> 
+	                 </LinearLayout>
+                     
+                     <LinearLayout
+	                     android:layout_width="match_parent"
+	                     android:layout_height="wrap_content"
+	                     android:layout_weight="1"
+	                     android:orientation="vertical">
+
+                         <Button
+                             android:id="@+id/button_capture"
+                             android:layout_width="wrap_content"
+                             android:layout_height="wrap_content"
+                             android:background="@drawable/bigcamera1" />
+                     
+                     </LinearLayout>
+                     
+                     <LinearLayout
+	                     android:layout_width="match_parent"
+	                     android:layout_height="match_parent"
+	                     android:layout_weight="2.5"
+	                     android:background="@drawable/nothing"
+	                     android:orientation="vertical"> 
+	                 </LinearLayout>
+                         
+                </LinearLayout>
+                     
+                  <LinearLayout
+                     android:layout_width="match_parent"
+                     android:layout_height="match_parent"
+                     android:layout_weight="2.2"> 
+                 </LinearLayout>
+               
+               </LinearLayout>
+        </LinearLayout>
+        
+        </RelativeLayout>
         
         <LinearLayout
                android:layout_width="match_parent"
@@ -102,10 +216,6 @@
          </LinearLayout>
        </LinearLayout>
 
-   <LinearLayout
-       android:layout_width="wrap_content"
-       android:layout_height="wrap_content" >
-
-</LinearLayout>
+   
 
 </RelativeLayout>

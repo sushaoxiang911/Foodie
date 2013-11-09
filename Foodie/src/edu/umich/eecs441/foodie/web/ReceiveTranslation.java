@@ -55,7 +55,7 @@ public class ReceiveTranslation extends AsyncTask <String, Void, String>{
 		
 		if (YouDaoSearchContent == null) {
 			Log.i(TAG + "Translate", "YouDaoSearchContent is null");
-			return new String ("result not found!");
+			return new String ("Oops! Result not found.");
 		}
 		
 		String YouDaoUrl = getUrl(YouDaoSearchContent);
@@ -88,7 +88,7 @@ public class ReceiveTranslation extends AsyncTask <String, Void, String>{
 				NodeList basic = xml.getElementsByTagName("basic");
 				
 				if (basic.getLength() == 0) {
-					return new String("Result not found");
+					return new String("Oops! Result not found.");
 				}
 				
 				Log.i(TAG + "Translate", "basic number" + basic.getLength());

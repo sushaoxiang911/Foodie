@@ -177,7 +177,7 @@ public class CameraActivity extends Activity {
                 Matrix mtx = new Matrix();
                 mtx.postRotate(90);
                 Bitmap bitmapPicture = 
-                	Bitmap.createBitmap(raw, 0, 0, raw.getWidth(), raw.getHeight(), mtx, true);
+                Bitmap.createBitmap(raw, 0, 0, raw.getWidth(), raw.getHeight(), mtx, true);
                 Log.i("cameratest", "rawWidth" + bitmapPicture.getWidth());
 				Log.i("cameratest", "rawHeight" + bitmapPicture.getHeight());
                 
