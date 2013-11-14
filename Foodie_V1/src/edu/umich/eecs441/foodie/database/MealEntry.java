@@ -2,6 +2,12 @@ package edu.umich.eecs441.foodie.database;
 
 import edu.umich.eecs441.foodie.DynamoDBOperation;
 
+
+/**
+ * This class is to make connections with DynamoDB back-end
+ * @author Shaoxiang Su
+ *
+ */
 public class MealEntry {
 	
 	private String recMealName;
@@ -10,6 +16,7 @@ public class MealEntry {
 	private String mealTranslation;
 	
 	private int clientId;
+	
 	
 	
 	

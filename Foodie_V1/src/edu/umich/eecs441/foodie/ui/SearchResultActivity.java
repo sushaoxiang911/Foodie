@@ -85,12 +85,13 @@ public class SearchResultActivity extends Activity  implements ContentSettable{
 				
 				Log.i("confirm listener", "path = " + getApplicationContext().getFilesDir().getPath());
 				
-				PictureScanning ps = new PictureScanning (getApplicationContext().getFilesDir().getPath());
+				// disable the button
+				confirm.setEnabled(false);
+				confirm.setVisibility(View.INVISIBLE);
 				
-				String mealName = ps.scanPicture(bitmap);
-				Log.i("MainActivity get the meal name", mealName);
-				ReceivePicture rp = new ReceivePicture(SearchResultActivity.this);
-				rp.execute(mealName);
+				PictureScanning ps = new PictureScanning (getApplicationContext().getFilesDir().getPath(),
+						SearchResultActivity.this);
+				ps.execute(bitmap);
 			}
 		});
 		

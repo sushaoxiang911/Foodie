@@ -73,10 +73,7 @@ public class ReceivePicture extends AsyncTask<String, Void, Bitmap>{
 	}
 	
 	
-	protected void onPreExecute() {
-		Log.i(TAG + "onPreExecute", "enter!");
-		contentSettableActivity.startProgressDialog();
-	}
+	
 	
 	@Override
 	protected Bitmap doInBackground(String... arg0) {
