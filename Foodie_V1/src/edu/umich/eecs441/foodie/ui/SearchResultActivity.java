@@ -1,6 +1,6 @@
 package edu.umich.eecs441.foodie.ui;
 
-import com.example.foodiepresdemo.R;
+import com.example.foodie.R;
 
 import edu.umich.eecs441.foodie.picture.PictureScanning;
 import edu.umich.eecs441.foodie.web.ContentSettable;

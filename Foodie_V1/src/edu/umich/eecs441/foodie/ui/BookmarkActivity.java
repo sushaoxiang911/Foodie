@@ -1,7 +1,7 @@
 package edu.umich.eecs441.foodie.ui;
 
 
-import com.example.foodiepresdemo.R;
+import com.example.foodie.R;
 
 import android.app.Activity;
 import android.content.Intent;

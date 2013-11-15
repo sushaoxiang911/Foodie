@@ -10,7 +10,7 @@ import java.util.Date;
 
 
 
-import com.example.foodiepresdemo.R;
+import com.example.foodie.R;
 
 import android.app.Activity;
 import android.content.Context;

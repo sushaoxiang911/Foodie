@@ -6,7 +6,7 @@ import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.io.OutputStream;
 
-import com.example.foodiepresdemo.R;
+import com.example.foodie.R;
 
 import android.app.Activity;
 import android.content.Context;
