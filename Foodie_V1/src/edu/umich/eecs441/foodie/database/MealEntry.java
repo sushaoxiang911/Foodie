@@ -1,5 +1,6 @@
 package edu.umich.eecs441.foodie.database;
 
+import edu.umich.eecs441.foodie.BackendMealEntry;
 import edu.umich.eecs441.foodie.DynamoDBOperation;
 
 
@@ -15,29 +16,22 @@ public class MealEntry {
 	private String picUrl;
 	private String mealTranslation;
 	
-	private int clientId;
 	
-	
-	
-	
-	
-	
+	public MealEntry(BackendMealEntry entry) {
+		recMealName = entry.getMealName();
+		mealTranslation = entry.getMealTranslation();
+		picUrl = entry.getPicUrl();
+	}
 	
 	public MealEntry(String recMealName, String picMealName, String picUrl,
-			String mealTranslation, int clientId) {
+			String mealTranslation) {
 		super();
 		this.recMealName = recMealName;
 		this.picMealName = picMealName;
 		this.picUrl = picUrl;
 		this.mealTranslation = mealTranslation;
-		this.clientId = clientId;
 	}
-	public int getClientId() {
-		return clientId;
-	}
-	public void setClientId(int clientId) {
-		this.clientId = clientId;
-	}
+
 	public String getRecMealName() {
 		return recMealName;
 	}
