@@ -25,39 +25,45 @@ public final class R {
     }
     public static final class drawable {
         public static final int background=0x7f020000;
-        public static final int backtocamera=0x7f020001;
-        public static final int bigcamera1=0x7f020002;
-        public static final int bigcamera2=0x7f020003;
-        public static final int blank=0x7f020004;
-        public static final int bookmark1=0x7f020005;
-        public static final int bookmark2=0x7f020006;
-        public static final int box=0x7f020007;
-        public static final int error=0x7f020008;
-        public static final int home1=0x7f020009;
-        public static final int home2=0x7f02000a;
-        public static final int ic_launcher=0x7f02000b;
-        public static final int next=0x7f02000c;
-        public static final int nothing=0x7f02000d;
-        public static final int resultbackground=0x7f02000e;
-        public static final int search1=0x7f02000f;
-        public static final int search2=0x7f020010;
+        public static final int backhome1=0x7f020001;
+        public static final int backhome2=0x7f020002;
+        public static final int backtocamera=0x7f020003;
+        public static final int bigcamera1=0x7f020004;
+        public static final int bigcamera2=0x7f020005;
+        public static final int blank=0x7f020006;
+        public static final int bookmark1=0x7f020007;
+        public static final int bookmark2=0x7f020008;
+        public static final int box=0x7f020009;
+        public static final int cameraback=0x7f02000a;
+        public static final int cameraback2=0x7f02000b;
+        public static final int error=0x7f02000c;
+        public static final int grey=0x7f02000d;
+        public static final int home1=0x7f02000e;
+        public static final int home2=0x7f02000f;
+        public static final int ic_launcher=0x7f020010;
+        public static final int next=0x7f020011;
+        public static final int nothing=0x7f020012;
+        public static final int resultbackground=0x7f020013;
+        public static final int search1=0x7f020014;
+        public static final int search2=0x7f020015;
     }
     public static final class id {
-        public static final int LinearLayout1=0x7f09000d;
-        public static final int action_settings=0x7f09000e;
+        public static final int LinearLayout1=0x7f09000e;
+        public static final int action_settings=0x7f09000f;
         public static final int bookmarkButton=0x7f090002;
         public static final int box_preview=0x7f090004;
-        public static final int button1=0x7f090008;
-        public static final int button2=0x7f090007;
-        public static final int button_capture=0x7f090005;
-        public static final int button_new=0x7f09000b;
+        public static final int button1=0x7f090009;
+        public static final int button2=0x7f090008;
+        public static final int button_back=0x7f090005;
+        public static final int button_capture=0x7f090006;
+        public static final int button_new=0x7f09000c;
         public static final int camera_preview=0x7f090003;
         public static final int homeButton=0x7f090000;
-        public static final int imageView1=0x7f090009;
-        public static final int imageView2=0x7f090006;
-        public static final int result_preview=0x7f09000c;
+        public static final int imageView1=0x7f09000a;
+        public static final int imageView2=0x7f090007;
+        public static final int result_preview=0x7f09000d;
         public static final int searchButton=0x7f090001;
-        public static final int textView2=0x7f09000a;
+        public static final int textView2=0x7f09000b;
     }
     public static final class layout {
         public static final int activity_bookmarks=0x7f030000;

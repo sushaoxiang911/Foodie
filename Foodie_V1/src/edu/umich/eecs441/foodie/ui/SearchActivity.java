@@ -34,10 +34,12 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 
 public class SearchActivity extends Activity {
+	/*
 	private Button homeButton;
 	private Button searchButton;
 	private Button bookMarkButton;
-
+	 */
+	private Button backHomeButton;
 	
 	// ----
 	public static final int MEDIA_TYPE_IMAGE = 1;
@@ -87,11 +89,20 @@ public class SearchActivity extends Activity {
 			}
 		});
 		
+		backHomeButton = (Button) findViewById(R.id.button_back);
+		backHomeButton.setOnClickListener(new OnClickListener() {
+
+		    @Override
+		    public void onClick(View arg0) {
+		    	backHomeButton.setBackground(getResources().getDrawable(R.drawable.backhome2));
+		    	onGoToHome(arg0);
+		    }
+		});
 		
 		//resultPreview = (ImageView) findViewById(R.id.result_preview);
 		 
 		 // ------
-		
+		/*
 		homeButton = (Button) findViewById(R.id.homeButton);
 		homeButton.setOnClickListener(new OnClickListener() {
 
@@ -119,7 +130,7 @@ public class SearchActivity extends Activity {
 		    	bookMarkButton.setBackground(getResources().getDrawable(R.drawable.bookmark2));
 		    	onGoToBookmark(arg0);
 		    }
-		});
+		});*/
 	}
 	
 	public void onGoToBookmark (View view) {
