@@ -1,5 +1,8 @@
 package edu.umich.eecs441.foodie.database;
 
+import java.io.IOException;
+
+import android.util.Log;
 import edu.umich.eecs441.foodie.BackendMealEntry;
 import edu.umich.eecs441.foodie.DynamoDBOperation;
 
@@ -11,10 +14,21 @@ import edu.umich.eecs441.foodie.DynamoDBOperation;
  */
 public class MealEntry {
 	
+	private static String TAG = "MealEntry.";
 	private String recMealName;
 	private String picMealName;
 	private String picUrl;
 	private String mealTranslation;
+	
+	
+	public void deleteMeal() throws IOException {
+		if (FoodieClient.getInstance().getClientStatus() == FoodieClient.OFFLINE){
+			Log.i(TAG + "deleteMeal", "Client is offline");
+		}
+		DynamoDBOperation.getInstance().cancelMeal(FoodieClient.getInstance().getClientStatus(), recMealName);
+	}
+	
+	
 	
 	
 	public MealEntry(BackendMealEntry entry) {
