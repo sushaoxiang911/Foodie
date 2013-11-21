@@ -40,6 +40,7 @@ public class BookmarkActivity extends Activity {
 		    @Override
 		    public void onClick(View arg0) {
 		    	searchButton.setBackground(getResources().getDrawable(R.drawable.search2));
+		    	bookMarkButton.setBackground(getResources().getDrawable(R.drawable.bookmark1));
 		    	onGoToSearch(arg0);
 		    }
 		});

@@ -90,6 +90,7 @@ public class MainActivity extends Activity {
 		    @Override
 		    public void onClick(View arg0) {
 		    	searchButton.setBackground(getResources().getDrawable(R.drawable.search2));
+		    	homeButton.setBackground(getResources().getDrawable(R.drawable.home1));
 		    	onGoToSearch(arg0);
 		    }
 		});
