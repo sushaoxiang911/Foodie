@@ -75,7 +75,7 @@ public class SearchActivity extends Activity {
 		captureButton.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				captureButton.setBackground(getResources().getDrawable(R.drawable.bigcamera2));
+				captureButton.setBackground(getResources().getDrawable(R.drawable.bigcamerab));
 				Log.i("cameratest", "onTake");
 				AutoFocusCallback myAutoFocusCallback = new AutoFocusCallback(){
 					  @Override
@@ -94,7 +94,7 @@ public class SearchActivity extends Activity {
 
 		    @Override
 		    public void onClick(View arg0) {
-		    	backHomeButton.setBackground(getResources().getDrawable(R.drawable.backhome2));
+		    	backHomeButton.setBackground(getResources().getDrawable(R.drawable.backhomeb));
 		    	onGoToHome(arg0);
 		    }
 		});
