@@ -30,7 +30,10 @@
         </activity>
         <activity android:name="edu.umich.eecs441.foodie.ui.BookmarkActivity" android:theme="@style/noAnimTheme">
         </activity>
-        <activity android:name="edu.umich.eecs441.foodie.ui.SearchResultActivity" android:theme="@style/noAnimTheme"></activity>
+        <activity android:name="edu.umich.eecs441.foodie.ui.SearchResultActivity" android:theme="@style/noAnimTheme">      
+        </activity>
+        <activity android:name="edu.umich.eecs441.foodie.ui.PreviewActivity" android:theme="@style/noAnimTheme">
+        </activity>
     </application>
     
 

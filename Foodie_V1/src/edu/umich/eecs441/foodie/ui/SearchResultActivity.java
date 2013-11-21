@@ -26,7 +26,6 @@ public class SearchResultActivity extends Activity  implements ContentSettable{
 	// -----
 	private static String TAG = "RecognizeActivity.";
 	
-	private Button confirm;
 	private Button recapture;
 	
 	private ImageView obtainedImage;
@@ -47,7 +46,6 @@ public class SearchResultActivity extends Activity  implements ContentSettable{
 		// -----
 		image = (ImageView) this.findViewById(R.id.imageView1);
 		
-		confirm = (Button)this.findViewById(R.id.button1);
 		
 		recapture = (Button)this.findViewById(R.id.button2);
 		
@@ -77,24 +75,10 @@ public class SearchResultActivity extends Activity  implements ContentSettable{
 			}
 			
 		});
-		
-		confirm.setOnClickListener(new OnClickListener() {
-
-			@Override
-			public void onClick(View arg0) {
-				
-				Log.i("confirm listener", "path = " + getApplicationContext().getFilesDir().getPath());
-				
-				// disable the button
-				confirm.setEnabled(false);
-				confirm.setVisibility(View.INVISIBLE);
-				
-				PictureScanning ps = new PictureScanning (getApplicationContext().getFilesDir().getPath(),
-						SearchResultActivity.this);
-				ps.execute(bitmap);
-			}
-		});
-		
+						
+		PictureScanning ps = new PictureScanning (getApplicationContext().getFilesDir().getPath(),
+					SearchResultActivity.this);
+		ps.execute(bitmap);
 		// -----
 		
 		homeButton = (Button) findViewById(R.id.homeButton);

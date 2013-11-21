@@ -269,7 +269,7 @@ public class SearchActivity extends Activity {
 				//resultPreview.setImageBitmap(croppedBitmap);
 				
 				Log.i("onPictureTaken", "Ready to new intent");
-				Intent intent = new Intent(SearchActivity.this, SearchResultActivity.class);
+				Intent intent = new Intent(SearchActivity.this, PreviewActivity.class);
 				intent.putExtra("croppedBitmap", croppedBitmap);
 				startActivity(intent);
 				
