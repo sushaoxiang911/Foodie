@@ -33,7 +33,7 @@ public final class R {
         public static final int blank=0x7f020006;
         public static final int bookmark1=0x7f020007;
         public static final int bookmark2=0x7f020008;
-        public static final int box=0x7f020009;
+        public static final int boxx=0x7f020009;
         public static final int cameraback=0x7f02000a;
         public static final int error=0x7f02000b;
         public static final int grey=0x7f02000c;
@@ -47,20 +47,17 @@ public final class R {
         public static final int search2=0x7f020014;
     }
     public static final class id {
-        public static final int LinearLayout1=0x7f09000e;
-        public static final int action_settings=0x7f09000f;
+        public static final int action_settings=0x7f09000c;
         public static final int bookmarkButton=0x7f090002;
         public static final int box_preview=0x7f090004;
         public static final int button1=0x7f090009;
         public static final int button2=0x7f090008;
         public static final int button_back=0x7f090005;
         public static final int button_capture=0x7f090006;
-        public static final int button_new=0x7f09000c;
         public static final int camera_preview=0x7f090003;
         public static final int homeButton=0x7f090000;
         public static final int imageView1=0x7f09000a;
         public static final int imageView2=0x7f090007;
-        public static final int result_preview=0x7f09000d;
         public static final int searchButton=0x7f090001;
         public static final int textView2=0x7f09000b;
     }
@@ -69,8 +66,6 @@ public final class R {
         public static final int activity_main=0x7f030001;
         public static final int activity_search=0x7f030002;
         public static final int activity_search_result=0x7f030003;
-        public static final int camera_activity=0x7f030004;
-        public static final int recognize_activity=0x7f030005;
     }
     public static final class menu {
         public static final int main=0x7f080000;
