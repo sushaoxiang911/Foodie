@@ -71,6 +71,7 @@ public class PreviewActivity extends Activity {
 			@Override
 			public void onClick(View arg0) {
 				confirm.setBackground(getResources().getDrawable(R.drawable.next2));
+				
 				Intent intent = new Intent(PreviewActivity.this, SearchResultActivity.class);
 				intent.putExtra("croppedBitmap", bitmap);
 				startActivity(intent);

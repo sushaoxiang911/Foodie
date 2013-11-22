@@ -47,7 +47,7 @@ public class SearchResultActivity extends Activity  implements ContentSettable{
 		image = (ImageView) this.findViewById(R.id.imageView1);
 		
 		
-		recapture = (Button)this.findViewById(R.id.button2);
+		//recapture = (Button)this.findViewById(R.id.button2);
 		
 		text = (TextView)this.findViewById(R.id.textView2);
 		
@@ -66,6 +66,7 @@ public class SearchResultActivity extends Activity  implements ContentSettable{
 		
 		
 		// set recapture listener
+		/*
 		recapture.setOnClickListener(new OnClickListener() {
 
 			@Override
@@ -74,7 +75,7 @@ public class SearchResultActivity extends Activity  implements ContentSettable{
 				startActivity(intent);
 			}
 			
-		});
+		});*/
 						
 		PictureScanning ps = new PictureScanning (getApplicationContext().getFilesDir().getPath(),
 					SearchResultActivity.this);
