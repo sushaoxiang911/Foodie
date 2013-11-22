@@ -97,6 +97,7 @@ public class SearchResultActivity extends Activity  implements ContentSettable{
 		    @Override
 		    public void onClick(View arg0) {
 		    	searchButton.setBackground(getResources().getDrawable(R.drawable.search2));
+		    	onGoToSearch (arg0);
 		    }
 		});
 		
@@ -122,6 +123,12 @@ public class SearchResultActivity extends Activity  implements ContentSettable{
 		this.startActivity(intent);
 	}
 
+	
+	public void onGoToSearch (View view) {
+		Intent intent = new Intent(view.getContext(), SearchActivity.class);
+		this.startActivity(intent);
+	}
+	
 	// disable the back button
 	@Override
 	public void onBackPressed() {
