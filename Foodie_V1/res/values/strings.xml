@@ -7,5 +7,7 @@
     <string name="confirm">Confirm</string>
     <string name="search">Search</string>
     <string name="recapture">Recapture</string>
+    <string name="login">Log in</string>
+    <string name="signup">Sign Up</string>
 
 </resources>

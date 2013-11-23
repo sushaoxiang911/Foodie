@@ -4,9 +4,10 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Vector;
 
+import edu.umich.eecs441.foodie.backend.BackendMealEntry;
+import edu.umich.eecs441.foodie.backend.DynamoDBOperation;
 import android.util.Log;
-import edu.umich.eecs441.foodie.BackendMealEntry;
-import edu.umich.eecs441.foodie.DynamoDBOperation;
+
 
 /**
  * This class is a singleton client class, which includes user_id and status of the client
@@ -93,6 +94,18 @@ public class FoodieClient {
 			result.add(new MealEntry(temp.get(i)));
 		}
 		return result;
+	}
+	/**
+	 * Create a new client with specific information. The function will check if the user has already existed.
+	  * Assign an ID to every client
+	  * @param username String, the new client's username
+	  * @param password String, the new client's password
+	  * @return 0 - user existed, try another one<br>
+	  * 		1 - success
+	 * @throws IOException 
+	 */
+	public static int signUp (String username, String password) throws IOException {
+		return DynamoDBOperation.getInstance().clientCreate(username, password);
 	}
 	
 }

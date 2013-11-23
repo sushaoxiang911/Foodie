@@ -241,6 +241,9 @@ public class SearchActivity extends Activity {
                 mtx.postRotate(90);
                 Bitmap bitmapPicture = 
                 	Bitmap.createBitmap(raw, 0, 0, raw.getWidth(), raw.getHeight(), mtx, true);
+                
+                raw.recycle();
+                
                 Log.i("cameratest", "rawWidth" + bitmapPicture.getWidth());
 				Log.i("cameratest", "rawHeight" + bitmapPicture.getHeight());
                 
@@ -265,12 +268,16 @@ public class SearchActivity extends Activity {
 				Log.i("cameratest", "yHeight" + yHeight);
 				Bitmap croppedBitmap = 
 					Bitmap.createBitmap(bitmapPicture, xLeft, yTop, xWidth, yHeight);
+				
+				bitmapPicture.recycle();
 				//visualize image DELETED LATER
 				//resultPreview.setImageBitmap(croppedBitmap);
 				
 				Log.i("onPictureTaken", "Ready to new intent");
 				Intent intent = new Intent(SearchActivity.this, PreviewActivity.class);
-				intent.putExtra("croppedBitmap", croppedBitmap);
+				intent.putExtra("croppedBitmap", croppedBitmap);			
+				Log.i("fda", "fda");
+				
 				startActivity(intent);
 				
 			}	

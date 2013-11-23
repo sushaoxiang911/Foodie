@@ -2,9 +2,10 @@ package edu.umich.eecs441.foodie.database;
 
 import java.io.IOException;
 
+import edu.umich.eecs441.foodie.backend.BackendMealEntry;
+import edu.umich.eecs441.foodie.backend.DynamoDBOperation;
 import android.util.Log;
-import edu.umich.eecs441.foodie.BackendMealEntry;
-import edu.umich.eecs441.foodie.DynamoDBOperation;
+
 
 
 /**
@@ -20,14 +21,25 @@ public class MealEntry {
 	private String picUrl;
 	private String mealTranslation;
 	
-	
+	/**
+	 * This function deletes the current meal entry
+	 * @throws IOException
+	 */
 	public void deleteMeal() throws IOException {
 		if (FoodieClient.getInstance().getClientStatus() == FoodieClient.OFFLINE){
 			Log.i(TAG + "deleteMeal", "Client is offline");
 		}
-		DynamoDBOperation.getInstance().cancelMeal(FoodieClient.getInstance().getClientStatus(), recMealName);
+		DynamoDBOperation.getInstance().cancelMeal(FoodieClient.getInstance().getUserId(), recMealName);
 	}
 	
+	// TODO: Actually, it depends on how to interpret the object. I can think of the entry object just exists in bookmark table, or it exists when we find a result(need further change)
+	// mark, create a backend object, call backend funciton
+	public void addMeal() throws IOException {
+		if (FoodieClient.getInstance().getClientStatus() == FoodieClient.OFFLINE){
+			Log.i(TAG + "deleteMeal", "Client is offline");
+		}
+		DynamoDBOperation.getInstance().markMeal(new BackendMealEntry(FoodieClient.getInstance().getUserId(), recMealName, mealTranslation, picUrl));
+	}
 	
 	
 	

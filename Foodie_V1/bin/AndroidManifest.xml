@@ -20,7 +20,7 @@
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
-        <activity android:name="edu.umich.eecs441.foodie.ui.MainActivity" android:theme="@style/noAnimTheme">
+        <activity android:name="edu.umich.eecs441.foodie.ui.LoginActivity" android:theme="@style/noAnimTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -33,6 +33,8 @@
         <activity android:name="edu.umich.eecs441.foodie.ui.SearchResultActivity" android:theme="@style/noAnimTheme">      
         </activity>
         <activity android:name="edu.umich.eecs441.foodie.ui.PreviewActivity" android:theme="@style/noAnimTheme">
+        </activity>
+        <activity android:name="edu.umich.eecs441.foodie.ui.MainActivity" android:theme="@style/noAnimTheme">
         </activity>
     </application>
     
