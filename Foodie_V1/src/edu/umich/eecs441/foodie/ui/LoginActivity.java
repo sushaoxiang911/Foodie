@@ -20,6 +20,7 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class LoginActivity extends Activity {
 	
@@ -155,7 +156,6 @@ public class LoginActivity extends Activity {
 			public void onClick(View arg0) {
 				signup.setBackground(getResources().getDrawable(R.drawable.signup2));
 				
-				
 				new Thread(new Runnable(){
 
 					@Override
@@ -163,6 +163,10 @@ public class LoginActivity extends Activity {
 						
 						String usernameString = username.getText().toString();
 						String passwordString = password.getText().toString();
+						
+						username.setText("", TextView.BufferType.EDITABLE);
+						password.setText("", TextView.BufferType.EDITABLE);
+						
 						try {
 							// the progress dialog
 							LoginActivity.this.runOnUiThread(new Runnable() {
@@ -185,6 +189,9 @@ public class LoginActivity extends Activity {
 							});
 							
 							if (result == 0) {
+								 Toast.makeText(getBaseContext(), 
+										   "User existed.", 
+									          Toast.LENGTH_SHORT).show(); 
 								Log.i(TAG + "sign up click", "user existed");
 							} else {
 								Log.i(TAG + "sign up click", "success");

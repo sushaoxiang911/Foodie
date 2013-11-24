@@ -32,6 +32,7 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 
 public class SearchActivity extends Activity {
 	/*
@@ -248,6 +249,7 @@ public class SearchActivity extends Activity {
 				Log.i("cameratest", "rawHeight" + bitmapPicture.getHeight());
                 
 				ImageView viewT = (ImageView) findViewById(R.id.box_preview);
+				LinearLayout viewTParent = (LinearLayout)viewT.getParent();
 				FrameLayout cameraT = (FrameLayout) findViewById(R.id.camera_preview);
 				double ratioX = (double)bitmapPicture.getWidth() / cameraT.getWidth();
 				double ratioY = (double)bitmapPicture.getHeight() / cameraT.getHeight();
@@ -257,8 +259,8 @@ public class SearchActivity extends Activity {
 				Log.i("cameratest", "xRatio" + ratioX);
 				Log.i("cameratest", "yRatio" + ratioY);
 				
-				xLeft = (int)(viewT.getLeft() * ratioX);
-				yTop = (int)(viewT.getTop() * ratioY);
+				xLeft = (int)(((LinearLayout)viewTParent.getParent()).getLeft() * ratioX);
+				yTop = (int)(viewTParent.getTop() * ratioY);
 				xWidth = (int)(viewT.getWidth() * ratioX);
 				yHeight = (int)(viewT.getHeight() * ratioY);
 				

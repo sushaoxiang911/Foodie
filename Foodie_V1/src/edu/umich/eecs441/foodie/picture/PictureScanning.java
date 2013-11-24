@@ -2,6 +2,8 @@ package edu.umich.eecs441.foodie.picture;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import android.app.Activity;
 
@@ -52,13 +54,21 @@ public class PictureScanning extends AsyncTask <Bitmap, Void, String>{
 		 String recognizedText = baseApi.getUTF8Text();
 		 baseApi.end(); 
 		 
-		 Log.v(TAG, "OCR Result: " + recognizedText); 
+		 Log.v(TAG, "OCR Result before filter: " + recognizedText); 
 		 
 		 // clean up and show
 		 if (DEFAULT_LANGUAGE.equalsIgnoreCase("eng")) {
 			 recognizedText = recognizedText.replaceAll("[^a-zA-Z0-9]+", " ");
 		 }
-		 return recognizedText;
+		 
+		 String regEx = "[^\u4E00-\u9FA5]";
+		 Pattern p = Pattern.compile(regEx);
+		 Matcher m = p.matcher(recognizedText);
+		 String filteredText = m.replaceAll("").trim();
+		 
+		 Log.v(TAG, "OCR Result after filter: " + filteredText);
+		 
+		 return filteredText;
 	 }
 
 	protected void onPreExecute() {
