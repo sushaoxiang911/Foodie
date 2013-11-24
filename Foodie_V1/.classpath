@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="con" path="com.android.ide.eclipse.adt.ANDROID_FRAMEWORK"/>
+	<classpathentry exported="true" kind="con" path="com.android.ide.eclipse.adt.LIBRARIES"/>
+	<classpathentry exported="true" kind="con" path="com.android.ide.eclipse.adt.DEPENDENCIES"/>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="src" path="gen"/>
+	<classpathentry kind="lib" path="/Users/xbjlie/Desktop/Foodie/AWS_androidLibs/aws-android-sdk-1.7.0-autoscaling.jar"/>
+	<classpathentry kind="lib" path="/Users/xbjlie/Desktop/Foodie/AWS_androidLibs/aws-android-sdk-1.7.0-cloudwatch.jar"/>
+	<classpathentry kind="lib" path="/Users/xbjlie/Desktop/Foodie/AWS_androidLibs/aws-android-sdk-1.7.0-core-no-third-party.jar"/>
+	<classpathentry kind="lib" path="/Users/xbjlie/Desktop/Foodie/AWS_androidLibs/aws-android-sdk-1.7.0-core.jar"/>
+	<classpathentry kind="lib" path="/Users/xbjlie/Desktop/Foodie/AWS_androidLibs/aws-android-sdk-1.7.0-ddb-mapper-debug.jar"/>
+	<classpathentry kind="lib" path="/Users/xbjlie/Desktop/Foodie/AWS_androidLibs/aws-android-sdk-1.7.0-ddb-mapper.jar"/>
+	<classpathentry kind="lib" path="/Users/xbjlie/Desktop/Foodie/AWS_androidLibs/aws-android-sdk-1.7.0-ddb.jar"/>
+	<classpathentry kind="lib" path="/Users/xbjlie/Desktop/Foodie/AWS_androidLibs/aws-android-sdk-1.7.0-debug.jar"/>
+	<classpathentry kind="lib" path="/Users/xbjlie/Desktop/Foodie/AWS_androidLibs/aws-android-sdk-1.7.0-ec2.jar"/>
+	<classpathentry kind="lib" path="/Users/xbjlie/Desktop/Foodie/AWS_androidLibs/aws-android-sdk-1.7.0-elb.jar"/>
+	<classpathentry kind="lib" path="/Users/xbjlie/Desktop/Foodie/AWS_androidLibs/aws-android-sdk-1.7.0-s3.jar"/>
+	<classpathentry kind="lib" path="/Users/xbjlie/Desktop/Foodie/AWS_androidLibs/aws-android-sdk-1.7.0-sdb.jar"/>
+	<classpathentry kind="lib" path="/Users/xbjlie/Desktop/Foodie/AWS_androidLibs/aws-android-sdk-1.7.0-ses.jar"/>
+	<classpathentry kind="lib" path="/Users/xbjlie/Desktop/Foodie/AWS_androidLibs/aws-android-sdk-1.7.0-sns.jar"/>
+	<classpathentry kind="lib" path="/Users/xbjlie/Desktop/Foodie/AWS_androidLibs/aws-android-sdk-1.7.0-sqs.jar"/>
+	<classpathentry kind="lib" path="/Users/xbjlie/Desktop/Foodie/AWS_androidLibs/aws-android-sdk-1.7.0-sts.jar"/>
+	<classpathentry exported="true" kind="lib" path="/Users/xbjlie/Desktop/Foodie/AWS_androidLibs/aws-android-sdk-1.7.0.jar"/>
+	<classpathentry kind="output" path="bin/classes"/>
+</classpath>
