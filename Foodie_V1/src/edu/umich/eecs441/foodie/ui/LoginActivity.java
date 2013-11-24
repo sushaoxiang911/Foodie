@@ -45,6 +45,7 @@ public class LoginActivity extends Activity {
 
 			@Override
 			public void onClick(View arg0) {
+				login.setBackground(getResources().getDrawable(R.drawable.login2));
 				
 				new Thread(new Runnable() {
 					@Override
@@ -152,7 +153,7 @@ public class LoginActivity extends Activity {
 
 			@Override
 			public void onClick(View arg0) {
-				
+				signup.setBackground(getResources().getDrawable(R.drawable.signup2));
 				
 				
 				new Thread(new Runnable(){
