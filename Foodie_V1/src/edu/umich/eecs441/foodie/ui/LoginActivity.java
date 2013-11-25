@@ -30,6 +30,7 @@ public class LoginActivity extends Activity {
 	private EditText password;
 	private Button login;
 	private Button signup;
+	private Button tryit;
 	
 	private ProgressDialog dialog;
 	
@@ -41,6 +42,16 @@ public class LoginActivity extends Activity {
 		password = (EditText) this.findViewById(R.id.password);
 		login = (Button) this.findViewById(R.id.button1);
 		signup = (Button) this.findViewById(R.id.button2);
+		tryit = (Button) this.findViewById(R.id.button3);
+		
+		tryit.setOnClickListener(new OnClickListener() {
+
+		    @Override
+		    public void onClick(View arg0) {
+		    	tryit.setBackground(getResources().getDrawable(R.drawable.try2));
+		    	onGoToSearch(arg0);
+		    }
+		});
 		
 		login.setOnClickListener(new OnClickListener () {
 
@@ -225,11 +236,14 @@ public class LoginActivity extends Activity {
 	public void startProgressDialog() {
 		dialog = ProgressDialog.show(LoginActivity.this, "Waiting...", "Logging in");
 	}
-
-
-
+	
 	public void dismissProgressDialog() {
 		dialog.dismiss();
+	}
+	
+	public void onGoToSearch (View view) {
+		Intent intent = new Intent(view.getContext(), SearchActivity.class);
+		this.startActivity(intent);
 	}
 
 }

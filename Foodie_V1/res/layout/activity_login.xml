@@ -29,8 +29,32 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="4"
-                    android:background="@drawable/previewords">
-            </LinearLayout>        
+                     android:orientation="vertical">
+                     
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="9"
+                     android:orientation="vertical">
+            </LinearLayout>   
+            
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="4"
+                    android:background="@drawable/dumpling"
+                    android:orientation="vertical">
+            </LinearLayout>   
+            
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="9"
+                     android:orientation="vertical">
+            </LinearLayout>   
+            </LinearLayout>      
+            
+            
 	       <LinearLayout
 	            android:layout_width="match_parent"
 	            android:layout_height="match_parent"
@@ -61,55 +85,108 @@
                 </LinearLayout>
 	            
                  <LinearLayout
-	                android:layout_width="match_parent"
-	                android:layout_height="match_parent"
-	                android:orientation="vertical"
-	                android:layout_weight="12">
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="10"
+                    android:background="@drawable/nothing">
+                    
+                      <LinearLayout
+	                    android:layout_width="match_parent"
+	                    android:layout_height="match_parent"
+	                    android:layout_weight="15"
+	                    android:background="@drawable/nothing">
+	                </LinearLayout>
 	                
-	                <EditText
-				        android:id="@+id/username"
-				        android:layout_width="match_parent"
-				        android:layout_height="wrap_content"
-				        android:background="@drawable/edittextback"
-				        android:ems="10"
-				        android:textSize="30px"
+                       <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="5"
+                        android:background="@drawable/nothing">
+                        
+                            
+                    <EditText
+                        android:id="@+id/username"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/edittextback"
+                        android:ems="10"
+                        android:textSize="27px"
                         android:gravity="center_vertical"
-                        android:hint="User name"
+                        android:hint="  Username"
                         android:singleLine="true"/>
-	                
-	            </LinearLayout>
+                           
+                    </LinearLayout>
+                    
+                        <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="15"
+                        android:background="@drawable/nothing">
+                    </LinearLayout>
+                </LinearLayout>
+                 
+                 
             
                  <LinearLayout
 	                android:layout_width="match_parent"
 	                android:layout_height="match_parent"
 	                android:orientation="vertical"
-	                android:layout_weight="15"
+	                android:layout_weight="14"
 	                android:background="@drawable/nothing">
-	            </LinearLayout>
-            
-                 <LinearLayout
-	                android:layout_width="match_parent"
-	                android:layout_height="match_parent"
-	                android:orientation="vertical"
-	                android:layout_weight="12">
-                     
-                      <EditText
-				        android:id="@+id/password"
-				        android:layout_width="match_parent"
-				        android:layout_height="wrap_content"
-				        android:background="@drawable/edittextback"
-				        android:ems="10"
-				        android:textSize="30px"
-                        android:gravity="center_vertical"
-                        android:hint="Password"
-                        android:singleLine="true"/>
 	            </LinearLayout>
 	            
                  <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:layout_weight="10"
+                    android:background="@drawable/nothing">
+                    
+                      <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="15"
+                        android:background="@drawable/nothing">
+                    </LinearLayout>
+                    
+                       <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="5"
+                        android:background="@drawable/nothing">
+                        
+                            
+                    
+                      <EditText
+                        android:id="@+id/password"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/edittextback"
+                        android:ems="10"
+                        android:textSize="27px"
+                        android:gravity="center_vertical"
+                        android:hint=" Password"
+                        android:inputType="textPassword"
+                        android:password="true"
+                        android:singleLine="true"/>
+                           
+                    </LinearLayout>
+                    
+                        <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="15"
+                        android:background="@drawable/nothing">
+                    </LinearLayout>
+                </LinearLayout>
+	            
+                 
+            
+	            
+                 <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
                     android:orientation="vertical"
-                    android:layout_weight="15"
+                    android:layout_weight="12"
                     android:background="@drawable/nothing">
                 </LinearLayout>
 	        </LinearLayout>
@@ -127,7 +204,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="vertical"
-                android:layout_weight="7">
+                android:layout_weight="9">
               </LinearLayout>
             
               <LinearLayout
@@ -163,7 +240,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="vertical"
-                android:layout_weight="7">
+                android:layout_weight="8">
               </LinearLayout>
               
               <LinearLayout
@@ -190,6 +267,43 @@
                  </LinearLayout>
                  
 	             <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="9">
+                 </LinearLayout>
+            
+              </LinearLayout>
+              
+               <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="8">
+                 </LinearLayout>
+              
+              <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="6">
+                 
+                 <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="9">
+                 </LinearLayout>
+                 
+                 <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="3">
+                    
+                    <Button
+                        android:id="@+id/button3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" 
+                        android:background="@drawable/try1"/>
+                 </LinearLayout>
+                 
+                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="9">
