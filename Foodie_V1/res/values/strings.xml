@@ -9,5 +9,9 @@
     <string name="recapture">Recapture</string>
     <string name="login">Log in</string>
     <string name="signup">Sign Up</string>
+    
+     <string name="about">About\n\n\n\n\n\n\n\n-------------------------------------\n
+                          Guidline\n\n\n\n\n\n\n\n-------------------------------------\n
+                          Special Thanks\n\n\n\n\n\n\n\n-------------------------------------\n</string>
 
 </resources>
