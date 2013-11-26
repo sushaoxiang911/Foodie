@@ -49,7 +49,7 @@ public class LoginActivity extends Activity {
 		    @Override
 		    public void onClick(View arg0) {
 		    	tryit.setBackground(getResources().getDrawable(R.drawable.try2));
-		    	onGoToSearch(arg0);
+		    	onGoToHomeGuest(arg0);
 		    }
 		});
 		
@@ -241,8 +241,8 @@ public class LoginActivity extends Activity {
 		dialog.dismiss();
 	}
 	
-	public void onGoToSearch (View view) {
-		Intent intent = new Intent(view.getContext(), SearchActivity.class);
+	public void onGoToHomeGuest (View view) {
+		Intent intent = new Intent(view.getContext(), MainActivityGuest.class);
 		this.startActivity(intent);
 	}
 
