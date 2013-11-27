@@ -1,0 +1,216 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+   
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:background="@drawable/background"
+    tools:context=".MainActivity" >
+
+   <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_weight="13" >
+        
+         <LinearLayout
+               android:layout_width="match_parent"
+               android:layout_height="match_parent"
+               android:orientation="vertical"
+               android:layout_weight="1.5" >
+               
+               
+               <LinearLayout
+                   android:layout_width="match_parent"
+                   android:layout_height="match_parent"
+                   android:layout_weight="7" 
+                   android:background="@drawable/resultbackground">
+                   
+                   <LinearLayout
+                       android:layout_width="match_parent"
+                       android:layout_height="match_parent"
+                       android:layout_weight="20" >
+                   </LinearLayout>
+               
+                 <LinearLayout
+                   android:layout_width="match_parent"
+                   android:layout_height="match_parent"
+                   android:orientation="vertical"
+                   android:layout_weight="6" >
+                   
+                    <ImageView
+                        android:id="@+id/imageView2"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent" >
+                    </ImageView>
+                
+             </LinearLayout>
+             
+              <LinearLayout
+                      android:layout_width="match_parent"
+                      android:layout_height="match_parent"
+                      android:layout_weight="20" >
+                  </LinearLayout>
+             
+             </LinearLayout>
+             
+             
+             <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="8" 
+                    android:background="@drawable/nothing">
+             </LinearLayout>
+             
+                 
+                
+            
+             <LinearLayout
+               android:layout_width="match_parent"
+               android:layout_height="match_parent"
+               android:layout_weight="2" 
+               android:background="@drawable/resultbackground"
+               android:orientation="vertical">
+              
+                  <LinearLayout
+                   android:layout_width="match_parent"
+                   android:layout_height="match_parent"
+                   android:layout_weight="9">
+                  </LinearLayout>
+                
+                 <LinearLayout
+                   android:layout_width="match_parent"
+                   android:layout_height="match_parent"
+                   android:layout_weight="3">
+                   
+                   <ImageView
+                        android:id="@+id/imageView1"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent" >
+                    </ImageView>
+                    
+                    
+               </LinearLayout>
+               
+                 <LinearLayout
+                     android:layout_width="match_parent"
+                     android:layout_height="match_parent"
+                     android:layout_weight="8"
+                     android:background="@drawable/nothing" >
+
+                     <Button
+                         android:id="@+id/button1"
+                         android:layout_width="wrap_content"
+                         android:layout_height="match_parent"
+                         android:text="Button" />
+                     
+               </LinearLayout>
+                
+                <LinearLayout
+                   android:layout_width="match_parent"
+                   android:layout_height="match_parent"
+                   android:layout_weight="7.9" 
+                   android:background="@drawable/nothing">
+                   
+                      <TextView
+                            android:id="@+id/textView2"
+                            android:typeface="sans"  
+                            android:textSize="20sp"
+                            android:textStyle="bold"  
+                            android:textColor="#0E1421"
+                            android:gravity="center" 
+                            android:layout_width="fill_parent"
+                            android:layout_height="fill_parent"
+                     />
+               </LinearLayout>
+               
+                <LinearLayout
+                   android:layout_width="match_parent"
+                   android:layout_height="match_parent"
+                   android:layout_weight="9" 
+                   android:background="@drawable/nothing">
+               </LinearLayout>
+                 
+             </LinearLayout>
+             
+             <LinearLayout
+                   android:layout_width="match_parent"
+                   android:layout_height="match_parent"
+                   android:layout_weight="7.9" 
+                   android:background="@drawable/nothing">
+               </LinearLayout>
+             
+         </LinearLayout>
+        
+        <LinearLayout
+               android:layout_width="match_parent"
+               android:layout_height="match_parent"
+               android:layout_weight="11.5" >
+                
+                <LinearLayout
+                   android:layout_width="match_parent"
+                   android:layout_height="match_parent"
+                   android:layout_weight="2.03" 
+                   android:orientation="horizontal">
+
+                   <Button
+                       android:id="@+id/homeButton"
+                       android:layout_width="match_parent"
+                       android:layout_height="match_parent"
+                       android:background="@drawable/home1" />
+
+                </LinearLayout>
+                
+                 <LinearLayout
+                       android:layout_width="match_parent"
+                       android:layout_height="match_parent"
+                       android:layout_weight="2.2" 
+                       android:orientation="horizontal">
+                 </LinearLayout>
+                
+                <LinearLayout
+                   android:layout_width="match_parent"
+                   android:layout_height="match_parent"
+                   android:layout_weight="2.1" >
+                    
+                   
+                   <Button
+                       android:id="@+id/searchButton"
+                       android:layout_width="match_parent"
+                       android:layout_height="match_parent"
+                       android:background="@drawable/search1" />
+                   
+
+                </LinearLayout>
+                
+                 <LinearLayout
+                       android:layout_width="match_parent"
+                       android:layout_height="match_parent"
+                       android:layout_weight="2.2" 
+                       android:orientation="horizontal">
+                 </LinearLayout>
+                
+                <LinearLayout
+                   android:layout_width="match_parent"
+                   android:layout_height="match_parent"
+                   android:layout_weight="1.9" >
+                   <Button
+                       android:id="@+id/bookmarkButton"
+                       android:layout_width="match_parent"
+                       android:layout_height="match_parent"
+                       android:background="@drawable/bookmark1" />
+                </LinearLayout>
+                
+               
+         </LinearLayout>
+       </LinearLayout>
+
+   <LinearLayout
+       android:layout_width="wrap_content"
+       android:layout_height="wrap_content" >
+
+</LinearLayout>
+
+</RelativeLayout>
