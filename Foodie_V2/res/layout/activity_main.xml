@@ -70,8 +70,38 @@
            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:layout_weight="8"
+                android:orientation="vertical">
+                
+               <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
                 android:layout_weight="8">
             </LinearLayout>
+            
+               <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="8">
+                
+                <Button
+                  android:id="@+id/logoutButton"
+                  android:layout_width="match_parent"
+                  android:layout_height="match_parent"
+                  android:background="@drawable/logout1" />
+                
+            </LinearLayout>
+            
+               <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="8">
+            </LinearLayout>
+                
+            </LinearLayout>
+            
+           
+           
         </LinearLayout>
             </LinearLayout>
          
