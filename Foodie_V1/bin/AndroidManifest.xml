@@ -36,6 +36,8 @@
         </activity>
         <activity android:name="edu.umich.eecs441.foodie.ui.MainActivity" android:theme="@style/noAnimTheme">
         </activity>
+        <activity android:name="edu.umich.eecs441.foodie.ui.SearchResultActivityGuest"></activity>
+        <activity android:name="edu.umich.eecs441.foodie.ui.MainActivityGuest"></activity>
     </application>
     
 

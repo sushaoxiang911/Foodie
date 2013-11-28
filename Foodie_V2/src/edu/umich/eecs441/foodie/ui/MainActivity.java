@@ -23,6 +23,7 @@ public class MainActivity extends Activity {
 	private Button homeButton;
 	private Button searchButton;
 	private Button bookMarkButton;
+	private Button logoutButton;
 	
 
 	@Override
@@ -102,6 +103,16 @@ public class MainActivity extends Activity {
 		    public void onClick(View arg0) {
 		    	bookMarkButton.setBackground(getResources().getDrawable(R.drawable.bookmark2));
 		    	onGoToBookmark(arg0);
+		    }
+		});
+		
+		logoutButton = (Button) findViewById(R.id.logoutButton);
+		logoutButton.setOnClickListener(new OnClickListener() {
+
+		    @Override
+		    public void onClick(View arg0) {
+		    	logoutButton.setBackground(getResources().getDrawable(R.drawable.logout2));
+		    	// TODO: log out code
 		    }
 		});
 	}

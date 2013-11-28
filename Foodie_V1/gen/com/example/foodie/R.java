@@ -52,37 +52,39 @@ public final class R {
         public static final int login1=0x7f020019;
         public static final int login2=0x7f02001a;
         public static final int loginback=0x7f02001b;
-        public static final int next1=0x7f02001c;
-        public static final int next2=0x7f02001d;
-        public static final int nothing=0x7f02001e;
-        public static final int resultbackground=0x7f02001f;
-        public static final int search1=0x7f020020;
-        public static final int search2=0x7f020021;
-        public static final int signup1=0x7f020022;
-        public static final int signup2=0x7f020023;
-        public static final int star1=0x7f020024;
-        public static final int star2=0x7f020025;
-        public static final int try1=0x7f020026;
-        public static final int try2=0x7f020027;
+        public static final int meishiji=0x7f02001c;
+        public static final int next1=0x7f02001d;
+        public static final int next2=0x7f02001e;
+        public static final int nothing=0x7f02001f;
+        public static final int resultbackground=0x7f020020;
+        public static final int search1=0x7f020021;
+        public static final int search2=0x7f020022;
+        public static final int signup1=0x7f020023;
+        public static final int signup2=0x7f020024;
+        public static final int star1=0x7f020025;
+        public static final int star2=0x7f020026;
+        public static final int try1=0x7f020027;
+        public static final int try2=0x7f020028;
     }
     public static final class id {
         public static final int LinearLayout1=0x7f090003;
         public static final int ScrollView1=0x7f090009;
-        public static final int action_settings=0x7f090011;
+        public static final int about=0x7f09000a;
+        public static final int action_settings=0x7f090012;
         public static final int bookmarkButton=0x7f090002;
-        public static final int box_preview=0x7f09000c;
+        public static final int box_preview=0x7f09000d;
         public static final int button1=0x7f090006;
         public static final int button2=0x7f090007;
         public static final int button3=0x7f090008;
-        public static final int button_back=0x7f09000d;
-        public static final int button_capture=0x7f09000e;
-        public static final int camera_preview=0x7f09000b;
+        public static final int button_back=0x7f09000e;
+        public static final int button_capture=0x7f09000f;
+        public static final int camera_preview=0x7f09000c;
         public static final int homeButton=0x7f090000;
-        public static final int imageView1=0x7f09000f;
-        public static final int imageView2=0x7f09000a;
+        public static final int imageView1=0x7f090010;
+        public static final int imageView2=0x7f09000b;
         public static final int password=0x7f090005;
         public static final int searchButton=0x7f090001;
-        public static final int textView2=0x7f090010;
+        public static final int textView2=0x7f090011;
         public static final int username=0x7f090004;
     }
     public static final class layout {
@@ -92,11 +94,13 @@ public final class R {
         public static final int activity_preview=0x7f030003;
         public static final int activity_search=0x7f030004;
         public static final int activity_search_result=0x7f030005;
+        public static final int activity_search_result_g=0x7f030006;
     }
     public static final class menu {
         public static final int main=0x7f080000;
     }
     public static final class string {
+        public static final int about=0x7f060007;
         public static final int action_settings=0x7f060001;
         public static final int app_name=0x7f060000;
         public static final int confirm=0x7f060002;
