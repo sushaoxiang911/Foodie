@@ -97,12 +97,7 @@ public class SearchActivity extends Activity {
 		    @Override
 		    public void onClick(View arg0) {
 		    	backHomeButton.setBackground(getResources().getDrawable(R.drawable.backhomeb));
-		    	if (FoodieClient.getInstance().getClientStatus() == FoodieClient.ONLINE) {
-		    		onGoToHome(arg0);
-		    	} else {
-		    		Intent intent = new Intent(SearchActivity.this, LoginActivity.class);
-		    		startActivity(intent);
-		    	}
+		    	onGoToHome(arg0);
 		    }
 		});
 		

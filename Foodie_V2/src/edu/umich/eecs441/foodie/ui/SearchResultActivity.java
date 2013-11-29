@@ -32,6 +32,9 @@ public class SearchResultActivity extends Activity  implements ContentSettable{
 	private Button searchButton;
 	private Button bookMarkButton;
 	
+	final Toast loginToast = Toast.makeText(SearchResultActivity.this, 
+			"Please log in.", Toast.LENGTH_SHORT);
+	
 	
 	// -----
 	private static String TAG = "RecognizeActivity.";
@@ -217,7 +220,7 @@ public class SearchResultActivity extends Activity  implements ContentSettable{
 		    	if (FoodieClient.getInstance().getClientStatus() == FoodieClient.ONLINE) {
 		    		onGoToHome(arg0);
 		    	} else {
-		    		Intent intent = new Intent(SearchResultActivity.this, LoginActivity.class);
+		    		Intent intent = new Intent(SearchResultActivity.this, MainActivity.class);
 		    		startActivity(intent);
 		    	}
 		    }
@@ -242,7 +245,7 @@ public class SearchResultActivity extends Activity  implements ContentSettable{
 		    		bookMarkButton.setBackground(getResources().getDrawable(R.drawable.bookmark2));
 		    		onGoToBookmark(arg0);
 		    	} else {
-		    		Toast.makeText(SearchResultActivity.this, "Please Login", Toast.LENGTH_SHORT).show();
+		    		loginToast.show();
 		    	}
 		    }
 		});

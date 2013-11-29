@@ -11,7 +11,9 @@
     <string name="signup">Sign Up</string>
     
      <string name="about">About\n\n\n\n\n\n\n\n-------------------------------------\n
-                          Guidline\n\n\n\n\n\n\n\n-------------------------------------\n
-                          Special Thanks\n\n\n\n\n\n\n\n-------------------------------------\n</string>
+                          Guidline\n\n\n\n\n\n\n\n-------------------------------------\n</string>
+     <string name="thanks1">Special thanks to Meishij.net</string>
+     <string name="thanks2">All food pictures are from Meishij.net</string>
+     
 
 </resources>

@@ -2,6 +2,8 @@ package edu.umich.eecs441.foodie.ui;
 
 import com.example.foodie.R;
 
+import edu.umich.eecs441.foodie.database.FoodieClient;
+
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -12,6 +14,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 public class PreviewActivity extends Activity {
 	
@@ -107,8 +110,14 @@ public class PreviewActivity extends Activity {
 
 		    @Override
 		    public void onClick(View arg0) {
-		    	bookMarkButton.setBackground(getResources().getDrawable(R.drawable.bookmark2));
-		    	onGoToBookmark(arg0);
+		    	if (FoodieClient.getInstance().getClientStatus() == FoodieClient.ONLINE) {
+		    		bookMarkButton.setBackground(getResources().getDrawable(R.drawable.bookmark2));
+			    	onGoToBookmark(arg0);
+		    	} else {
+		    		Toast.makeText(getBaseContext(), 
+							   "Please log in.", 
+						          Toast.LENGTH_SHORT).show(); 
+		    	}
 		    }
 		});
 		

@@ -6,8 +6,6 @@ import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.io.OutputStream;
 
-import com.example.foodie.R;
-
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -17,6 +15,11 @@ import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+import android.widget.Toast;
+
+import com.example.foodie.R;
+
+import edu.umich.eecs441.foodie.database.FoodieClient;
 
 public class MainActivity extends Activity {
 	
@@ -24,6 +27,10 @@ public class MainActivity extends Activity {
 	private Button searchButton;
 	private Button bookMarkButton;
 	private Button logoutButton;
+	private Button signupButton;
+	
+	final Toast loginToast = Toast.makeText(MainActivity.this, 
+			"Please log in.", Toast.LENGTH_SHORT);
 	
 
 	@Override
@@ -74,7 +81,6 @@ public class MainActivity extends Activity {
 			Log.i("Main Activity", "File Existed");
 		}
 		
-		
 		homeButton = (Button) findViewById(R.id.homeButton);
 		homeButton.setOnClickListener(new OnClickListener() {
 
@@ -101,20 +107,43 @@ public class MainActivity extends Activity {
 
 		    @Override
 		    public void onClick(View arg0) {
-		    	bookMarkButton.setBackground(getResources().getDrawable(R.drawable.bookmark2));
-		    	onGoToBookmark(arg0);
+		    	if (FoodieClient.getInstance().getClientStatus() == FoodieClient.ONLINE) {
+		    		bookMarkButton.setBackground(getResources().getDrawable(R.drawable.bookmark2));
+			    	onGoToBookmark(arg0);
+		    	} else {
+		    		loginToast.show();
+		    	}
 		    }
 		});
 		
 		logoutButton = (Button) findViewById(R.id.logoutButton);
-		logoutButton.setOnClickListener(new OnClickListener() {
+		if (FoodieClient.getInstance().getClientStatus() == FoodieClient.ONLINE) {
+			logoutButton.setOnClickListener(new OnClickListener() {
 
-		    @Override
-		    public void onClick(View arg0) {
-		    	logoutButton.setBackground(getResources().getDrawable(R.drawable.logout2));
-		    	// TODO: log out code
-		    }
-		});
+			    @Override
+			    public void onClick(View arg0) {
+			    	logoutButton.setBackground(getResources().getDrawable(R.drawable.logout2));
+			    	// TODO: log out code
+			    }
+			});
+		} else {
+			logoutButton.setVisibility(Button.INVISIBLE);
+		}
+		
+		signupButton = (Button) findViewById(R.id.signupButtonH);
+		if (FoodieClient.getInstance().getClientStatus() == FoodieClient.ONLINE) {
+			signupButton.setVisibility(Button.INVISIBLE);
+		} else {
+			signupButton.setOnClickListener(new OnClickListener() {
+
+			    @Override
+			    public void onClick(View arg0) {
+			    	signupButton.setBackground(getResources().getDrawable(R.drawable.homesignup2));
+			    	onGoToHome (arg0);
+			    }
+			});
+		}
+			
 	}
 	
 	public void onGoToSearch (View view) {
@@ -124,6 +153,11 @@ public class MainActivity extends Activity {
 	
 	public void onGoToBookmark (View view) {
 		Intent intent = new Intent(view.getContext(), BookmarkActivity.class);
+		this.startActivity(intent);
+	}
+	
+	public void onGoToHome (View view) {
+		Intent intent = new Intent(view.getContext(), LoginActivity.class);
 		this.startActivity(intent);
 	}
 	
