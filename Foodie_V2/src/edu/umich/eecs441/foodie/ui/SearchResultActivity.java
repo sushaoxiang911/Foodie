@@ -32,8 +32,6 @@ public class SearchResultActivity extends Activity  implements ContentSettable{
 	private Button searchButton;
 	private Button bookMarkButton;
 	
-	final Toast loginToast = Toast.makeText(SearchResultActivity.this, 
-			"Please log in.", Toast.LENGTH_SHORT);
 	
 	
 	// -----
@@ -58,6 +56,9 @@ public class SearchResultActivity extends Activity  implements ContentSettable{
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_search_result);
+		
+		final Toast loginToast = Toast.makeText(SearchResultActivity.this, 
+				"Please log in.", Toast.LENGTH_SHORT);
 		
 		Log.i(TAG + "onCreate", "Client status = " + FoodieClient.getInstance().getClientStatus());
 		

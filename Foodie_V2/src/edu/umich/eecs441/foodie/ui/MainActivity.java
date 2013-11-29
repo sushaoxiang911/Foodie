@@ -29,14 +29,15 @@ public class MainActivity extends Activity {
 	private Button logoutButton;
 	private Button signupButton;
 	
-	final Toast loginToast = Toast.makeText(MainActivity.this, 
-			"Please log in.", Toast.LENGTH_SHORT);
-	
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
+		
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
+		
+		final Toast loginToast = Toast.makeText(MainActivity.this, 
+				"Please log in.", Toast.LENGTH_SHORT);
 		
 		Log.i("Main Activity", "Check tessdata");
 		

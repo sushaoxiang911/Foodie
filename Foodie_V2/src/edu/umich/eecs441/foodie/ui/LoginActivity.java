@@ -292,7 +292,7 @@ public class LoginActivity extends Activity {
 	}
 	
 	public void onGoToHomeGuest (View view) {
-		Intent intent = new Intent(view.getContext(), SearchActivity.class);
+		Intent intent = new Intent(view.getContext(), MainActivity.class);
 		this.startActivity(intent);
 	}
 	

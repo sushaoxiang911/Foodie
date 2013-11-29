@@ -38,6 +38,9 @@ public class PreviewActivity extends Activity {
 		
 		setContentView(R.layout.activity_preview);
 		
+		final Toast loginToast = Toast.makeText(PreviewActivity.this, 
+				"Please log in.", Toast.LENGTH_SHORT);
+		
 		confirm = (Button)this.findViewById(R.id.button1);
 		
 		recapture = (Button)this.findViewById(R.id.button2);
@@ -114,9 +117,7 @@ public class PreviewActivity extends Activity {
 		    		bookMarkButton.setBackground(getResources().getDrawable(R.drawable.bookmark2));
 			    	onGoToBookmark(arg0);
 		    	} else {
-		    		Toast.makeText(getBaseContext(), 
-							   "Please log in.", 
-						          Toast.LENGTH_SHORT).show(); 
+		    		loginToast.show(); 
 		    	}
 		    }
 		});
