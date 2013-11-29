@@ -75,6 +75,9 @@ public class SearchResultActivity extends Activity  implements ContentSettable{
 		// the bookmark button!
 		button = (Button)this.findViewById(R.id.button1);
 		
+		// set button invisible
+		setButtonInvisible(false);
+		
 		
 		// set the obtainedImage get the map
 		if (getIntent().hasExtra("croppedBitmap")) {
@@ -188,7 +191,7 @@ public class SearchResultActivity extends Activity  implements ContentSettable{
 			});
 		
 		} else {
-			setButtonInvisible();
+			setButtonInvisible(false);
 		}
 		
 		
@@ -321,9 +324,12 @@ public class SearchResultActivity extends Activity  implements ContentSettable{
 	}
 
 	@Override
-	public void setButtonInvisible() {
-		button.setVisibility(Button.INVISIBLE);
-		
+	public void setButtonInvisible(boolean set) {
+		if (!set) {
+			button.setVisibility(Button.INVISIBLE);
+		} else {
+			button.setVisibility(Button.VISIBLE);
+		}
 	}
 	
 	public void setMealEntry(MealEntry mealEntry) {

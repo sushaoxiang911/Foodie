@@ -125,6 +125,8 @@ public class MainActivity extends Activity {
 			    public void onClick(View arg0) {
 			    	logoutButton.setBackground(getResources().getDrawable(R.drawable.logout2));
 			    	// TODO: log out code
+			    	onGoToHome(arg0);
+			    	FoodieClient.getInstance().clientLogout();
 			    }
 			});
 		} else {

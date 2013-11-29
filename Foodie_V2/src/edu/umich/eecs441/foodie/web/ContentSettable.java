@@ -14,7 +14,7 @@ public interface ContentSettable extends ProgressDialogApplicable {
 	
 	public void setButtonText (boolean existed);
 	
-	public void setButtonInvisible();
+	public void setButtonInvisible(boolean set);
 
 	public void setMealEntry(MealEntry mealEntry);
 }

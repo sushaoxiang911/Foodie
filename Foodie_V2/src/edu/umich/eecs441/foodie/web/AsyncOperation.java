@@ -117,12 +117,13 @@ public class AsyncOperation extends AsyncTask <Bitmap, Void, MealEntry>{
 				// set error check
 				contentSettableActivity.setImageView(null);
 				contentSettableActivity.setText(new String ("Oops! Foodie could not find the food information."));
-				contentSettableActivity.setButtonInvisible();
+				contentSettableActivity.setButtonInvisible(false);
 			} else {
 				contentSettableActivity.setImageView(mealPic);
 				contentSettableActivity.setText(result.getMealTranslation());
 				contentSettableActivity.setButtonText(existed);
 				contentSettableActivity.setMealEntry(result);
+				contentSettableActivity.setButtonInvisible(true);
 			}
 		}
 		contentSettableActivity.dismissProgressDialog();

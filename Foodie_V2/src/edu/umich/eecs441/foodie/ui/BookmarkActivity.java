@@ -2,6 +2,10 @@ package edu.umich.eecs441.foodie.ui;
 
 
 import java.io.IOException;
+import java.io.InputStream;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Vector;
 
@@ -9,15 +13,23 @@ import com.example.foodie.R;
 
 import edu.umich.eecs441.foodie.database.FoodieClient;
 import edu.umich.eecs441.foodie.database.MealEntry;
+import edu.umich.eecs441.foodie.mark.BookmarkAdapter;
 import android.app.Activity;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.ViewGroup;
+import android.widget.BaseAdapter;
 import android.widget.Button;
+import android.widget.ListView;
 
 public class BookmarkActivity extends Activity {
 	
@@ -29,15 +41,23 @@ public class BookmarkActivity extends Activity {
 	
 	private ProgressDialog dialog;
 	
-	private List<MealEntry> mealList;
-
-	private Button button;
+	private ArrayList<MealEntry> mealList;
+	private ArrayList<Bitmap> picList;
+	
+	
+	
+	private ListView bookmarkList;
+	private BookmarkAdapter bookmarkAdapter;
+	
 	
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_bookmarks);
+		
+		bookmarkList = (ListView)this.findViewById(R.id.listView1);
+		
 		
 		new Thread (new Runnable() {
 			@Override
@@ -52,11 +72,37 @@ public class BookmarkActivity extends Activity {
 				
 				// loading data
 				try {
-					mealList = FoodieClient.getInstance().getMarkingData();
+					mealList = new ArrayList(FoodieClient.getInstance().getMarkingData());
 				} catch (IOException e) {
 					Log.i(TAG + "onCreate, getting data thread", "IOException");
 					e.printStackTrace();
 				}
+				
+				picList = new ArrayList<Bitmap>();
+				
+				for (MealEntry m : mealList) {
+					Log.i(TAG + "Load pictures", "For loop");
+					URL picUrl = null;
+					Bitmap picMap = null;
+					try {
+						picUrl = new URL (m.getPicUrl());
+					} catch (MalformedURLException e) {
+						e.printStackTrace();
+					} 
+					if (picUrl != null) {
+						try {
+							picMap = BitmapFactory.decodeStream((InputStream)picUrl.getContent());
+						} catch (IOException e) {
+							e.printStackTrace();
+							// picmap comes from resource
+						}
+					} else {
+						// picmap comes from resource
+					}
+					picList.add(picMap);
+				}
+				
+				Log.i(TAG + "onCreate getting data thread", "pic size = " + picList.size());
 				Log.i(TAG + "onCreate getting data thread", "data size = " + mealList.size());
 				
 				for (MealEntry m : mealList) {
@@ -69,7 +115,6 @@ public class BookmarkActivity extends Activity {
 					public void run() {
 						// call back function
 						setContent();
-						
 						BookmarkActivity.this.dialog.dismiss();
 					}
 				});
@@ -138,6 +183,7 @@ public class BookmarkActivity extends Activity {
 		
 	}
 	
+	
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
@@ -152,33 +198,8 @@ public class BookmarkActivity extends Activity {
 	 * 
 	 */
 	private void setContent() {
+		bookmarkAdapter = new BookmarkAdapter(BookmarkActivity.this, mealList, picList);
+		bookmarkList.setAdapter(bookmarkAdapter);
 		
 	}
-	
-	/**
-	 * This class is to delete a specific entry, put it inside the onClickListener
-	 * as "new CancelThread(theMealEntry).start;"
-	 * @author Shaoxiang Su
-	 *
-	 */
-	protected class CancelThread implements Runnable {
-		
-		private MealEntry mealEntry;
-		
-		protected CancelThread(MealEntry mealEntry) {
-			this.mealEntry = mealEntry;
-		}
-		@Override
-		public void run() {
-			try {
-				mealEntry.deleteMeal();
-			} catch (IOException e) {
-				Log.i(TAG + "CancelThread", "cancel failed");
-				e.printStackTrace();
-			}
-		}
-		
-	}
-	
-	
 }
