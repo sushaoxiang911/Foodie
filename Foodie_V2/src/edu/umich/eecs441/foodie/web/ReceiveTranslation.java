@@ -97,7 +97,24 @@ public class ReceiveTranslation{
 					NodeList web = xml.getElementsByTagName("web");
 					
 					if (web.getLength() == 0) {
-						return new String("Oops! Foodie could not find the food information.");
+						NodeList trans = xml.getElementsByTagName("translation");
+						NodeList para = ((Element)trans.item(0)).getElementsByTagName("paragraph");
+						Node paraTranslation = para.item(0);
+						if (paraTranslation.getNodeType() == Node.ELEMENT_NODE) {
+							Element translationElement = (Element) paraTranslation;
+							Node child = translationElement.getFirstChild();
+							if (child instanceof CharacterData) {
+								CharacterData cd = (CharacterData) child;
+								result =  WordUtils.capitalize(cd.getData());
+								Log.i(TAG + "webTranslate", "result = " + result);
+							}
+						}
+						if (result.length() != 0) {
+							return result;
+						} else {
+							Log.i(TAG + "Translate", "No Result");
+							return new String("Oops! Foodie could not find the food information.");
+						}
 					}
 					Log.i(TAG + "Translate", "web nunber = " + web.getLength());
 					Element webElement = (Element)web.item(0);

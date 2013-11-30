@@ -3,7 +3,7 @@ package edu.umich.eecs441.foodie.ui;
 import com.example.foodie.R;
 
 import edu.umich.eecs441.foodie.database.FoodieClient;
-
+import edu.umich.eecs441.foodie.web.WebConnectionCheck;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -40,6 +40,8 @@ public class PreviewActivity extends Activity {
 		
 		final Toast loginToast = Toast.makeText(PreviewActivity.this, 
 				"Please log in.", Toast.LENGTH_SHORT);
+		final Toast checkToast = Toast.makeText(PreviewActivity.this, 
+				"Please connect to internet.", Toast.LENGTH_SHORT);
 		
 		confirm = (Button)this.findViewById(R.id.button1);
 		
@@ -76,12 +78,18 @@ public class PreviewActivity extends Activity {
 
 			@Override
 			public void onClick(View arg0) {
-				confirm.setBackground(getResources().getDrawable(R.drawable.next2));
+				if (!WebConnectionCheck.hasInternetConnection(PreviewActivity.this))
+		    	{
+		    		checkToast.show();
+		    	}
+		    	else
+		    	{
+		    		confirm.setBackground(getResources().getDrawable(R.drawable.next2));
 				
-				Intent intent = new Intent(PreviewActivity.this, SearchResultActivity.class);
-				intent.putExtra("croppedBitmap", bitmap);
-				startActivity(intent);
-				
+		    		Intent intent = new Intent(PreviewActivity.this, SearchResultActivity.class);
+		    		intent.putExtra("croppedBitmap", bitmap);
+		    		startActivity(intent);
+		    	}
 			}
 			
 		});
@@ -113,11 +121,18 @@ public class PreviewActivity extends Activity {
 
 		    @Override
 		    public void onClick(View arg0) {
-		    	if (FoodieClient.getInstance().getClientStatus() == FoodieClient.ONLINE) {
-		    		bookMarkButton.setBackground(getResources().getDrawable(R.drawable.bookmark2));
-			    	onGoToBookmark(arg0);
-		    	} else {
-		    		loginToast.show(); 
+		    	if (!WebConnectionCheck.hasInternetConnection(PreviewActivity.this))
+		    	{
+		    		checkToast.show();
+		    	}
+		    	else
+		    	{
+		    		if (FoodieClient.getInstance().getClientStatus() == FoodieClient.ONLINE) {
+		    			bookMarkButton.setBackground(getResources().getDrawable(R.drawable.bookmark2));
+		    			onGoToBookmark(arg0);
+		    		} else {
+		    			loginToast.show(); 
+		    		}
 		    	}
 		    }
 		});

@@ -13,6 +13,7 @@ import edu.umich.eecs441.foodie.picture.PictureScanning;
 import edu.umich.eecs441.foodie.web.AsyncOperation;
 import edu.umich.eecs441.foodie.web.ContentSettable;
 import edu.umich.eecs441.foodie.web.ReceivePicture;
+import edu.umich.eecs441.foodie.web.WebConnectionCheck;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
@@ -52,6 +53,10 @@ public class SearchResultActivity extends Activity  implements ContentSettable{
 	// call back to get the newMealEntry
 	MealEntry newMealEntry = null;
 	
+	
+	// for the button
+	private boolean ifExisted = false;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -59,6 +64,8 @@ public class SearchResultActivity extends Activity  implements ContentSettable{
 		
 		final Toast loginToast = Toast.makeText(SearchResultActivity.this, 
 				"Please log in.", Toast.LENGTH_SHORT);
+		final Toast checkToast = Toast.makeText(SearchResultActivity.this, 
+				"Please connect to internet.", Toast.LENGTH_SHORT);
 		
 		Log.i(TAG + "onCreate", "Client status = " + FoodieClient.getInstance().getClientStatus());
 		
@@ -118,74 +125,81 @@ public class SearchResultActivity extends Activity  implements ContentSettable{
 			button.setOnClickListener(new OnClickListener () {
 				@Override
 				public void onClick(View arg0) {
-					button.setBackground(getResources().getDrawable(R.drawable.star2));
-					// mealEntry is not null
-					if (newMealEntry != null) {
-						// check if the mealEntry is existed
-						// here I use button text, actually, you can call back and set a guard to denote that
-						Log.i(TAG + "mark onClick button background id", button.getBackground().toString());
-						if (**********************TODO) {
-							Log.i(TAG + "mark onClick", "mealEntry existed");
-							new Thread(new Runnable() {
-								@Override
-								public void run() {
-									SearchResultActivity.this.runOnUiThread(new Runnable() {
-										@Override
-										public void run() {
-											SearchResultActivity.this.dialog = 
-													ProgressDialog.show(SearchResultActivity.this, "Waiting...", "Marking");
+					if (!WebConnectionCheck.hasInternetConnection(SearchResultActivity.this))
+			    	{
+			    		checkToast.show();
+			    	}
+					else
+					{
+						button.setBackground(getResources().getDrawable(R.drawable.star2));
+						// mealEntry is not null
+						if (newMealEntry != null) {
+							// check if the mealEntry is existed
+							// here I use button text, actually, you can call back and set a guard to denote that
+							Log.i(TAG + "mark onClick button background id", button.getBackground().toString());
+							if (ifExisted) {
+								Log.i(TAG + "mark onClick", "mealEntry existed");
+								new Thread(new Runnable() {
+									@Override
+									public void run() {
+										SearchResultActivity.this.runOnUiThread(new Runnable() {
+											@Override
+											public void run() {
+												SearchResultActivity.this.dialog = 
+														ProgressDialog.show(SearchResultActivity.this, "Waiting...", "Marking");
+											}
+										});
+										
+										// mark the meal
+										try {
+											newMealEntry.deleteMeal();
+										} catch (IOException e) {
+											e.printStackTrace();
 										}
-									});
-									
-									// mark the meal
-									try {
-										newMealEntry.deleteMeal();
-									} catch (IOException e) {
-										e.printStackTrace();
+										
+										
+										SearchResultActivity.this.runOnUiThread(new Runnable() {
+											@Override
+											public void run() {
+												// change button to not existed
+												setButtonText(false);
+												SearchResultActivity.this.dismissProgressDialog();
+											}
+										});
 									}
-									
-									
-									SearchResultActivity.this.runOnUiThread(new Runnable() {
-										@Override
-										public void run() {
-											// change button to not existed
-											setButtonText(false);
-											SearchResultActivity.this.dismissProgressDialog();
+								}).start();		
+							} else {
+								Log.i(TAG + "mark onClick", "mealEntry not existed");
+								new Thread(new Runnable() {
+									@Override
+									public void run() {
+										SearchResultActivity.this.runOnUiThread(new Runnable() {
+											@Override
+											public void run() {
+												SearchResultActivity.this.dialog = 
+														ProgressDialog.show(SearchResultActivity.this, "Waiting...", "Marking");
+											}
+										});
+										
+										// cancel mark
+										try {
+											newMealEntry.addMeal();
+										} catch (IOException e) {
+											e.printStackTrace();
 										}
-									});
-								}
-							}).start();		
-						} else {
-							Log.i(TAG + "mark onClick", "mealEntry not existed");
-							new Thread(new Runnable() {
-								@Override
-								public void run() {
-									SearchResultActivity.this.runOnUiThread(new Runnable() {
-										@Override
-										public void run() {
-											SearchResultActivity.this.dialog = 
-													ProgressDialog.show(SearchResultActivity.this, "Waiting...", "Marking");
-										}
-									});
-									
-									// cancel mark
-									try {
-										newMealEntry.addMeal();
-									} catch (IOException e) {
-										e.printStackTrace();
+										
+										
+										SearchResultActivity.this.runOnUiThread(new Runnable() {
+											@Override
+											public void run() {
+												// change button to existed
+												setButtonText(true);
+												SearchResultActivity.this.dismissProgressDialog();
+											}
+										});
 									}
-									
-									
-									SearchResultActivity.this.runOnUiThread(new Runnable() {
-										@Override
-										public void run() {
-											// change button to existed
-											setButtonText(true);
-											SearchResultActivity.this.dismissProgressDialog();
-										}
-									});
-								}
-							}).start();	
+								}).start();	
+							}
 						}
 					}
 				}
@@ -236,8 +250,15 @@ public class SearchResultActivity extends Activity  implements ContentSettable{
 
 		    @Override
 		    public void onClick(View arg0) {
-		    	searchButton.setBackground(getResources().getDrawable(R.drawable.search2));
-		    	onGoToSearch (arg0);
+		    	if (!WebConnectionCheck.hasInternetConnection(SearchResultActivity.this))
+		    	{
+		    		checkToast.show();
+		    	}
+		    	else 
+		    	{
+		    		searchButton.setBackground(getResources().getDrawable(R.drawable.search2));
+		    		onGoToSearch (arg0);
+		    	}
 		    }
 		});
 		
@@ -246,11 +267,18 @@ public class SearchResultActivity extends Activity  implements ContentSettable{
 
 		    @Override
 		    public void onClick(View arg0) {
-		    	if (FoodieClient.getInstance().getClientStatus() == FoodieClient.ONLINE) {
-		    		bookMarkButton.setBackground(getResources().getDrawable(R.drawable.bookmark2));
-		    		onGoToBookmark(arg0);
-		    	} else {
-		    		loginToast.show();
+		    	if (!WebConnectionCheck.hasInternetConnection(SearchResultActivity.this))
+		    	{
+		    		checkToast.show();
+		    	}
+		    	else 
+		    	{
+		    		if (FoodieClient.getInstance().getClientStatus() == FoodieClient.ONLINE) {
+		    			bookMarkButton.setBackground(getResources().getDrawable(R.drawable.bookmark2));
+		    			onGoToBookmark(arg0);
+		    		} else {
+		    			loginToast.show();
+		    		}
 		    	}
 		    }
 		});
@@ -317,6 +345,7 @@ public class SearchResultActivity extends Activity  implements ContentSettable{
 
 	// the callback of control button
 	public void setButtonText (boolean existed) {
+		ifExisted = existed;
 		if (existed) {
 			button.setBackground(getResources().getDrawable(R.drawable.star2));
 		} else {

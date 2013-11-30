@@ -5,10 +5,12 @@ import java.io.IOException;
 import com.example.foodie.R;
 
 import edu.umich.eecs441.foodie.database.FoodieClient;
+import edu.umich.eecs441.foodie.web.WebConnectionCheck;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
@@ -33,16 +35,16 @@ public class LoginActivity extends Activity {
 	
 	private ProgressDialog dialog;
 	
+	
 	protected void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		
-
+		super.onCreate(savedInstanceState);		
 		setContentView (R.layout.activity_login);
 		username = (EditText) this.findViewById(R.id.username);
 		password = (EditText) this.findViewById(R.id.password);
 		login = (Button) this.findViewById(R.id.button1);
 		signup = (Button) this.findViewById(R.id.button2);
 		tryit = (Button) this.findViewById(R.id.button3);
+		
 		final Toast checkToast = Toast.makeText(LoginActivity.this, 
 				"Please connect to internet.", Toast.LENGTH_SHORT);   
 		final Toast inputToast = Toast.makeText(LoginActivity.this, 
@@ -63,13 +65,79 @@ public class LoginActivity extends Activity {
 		final Toast noUserToast = Toast.makeText(LoginActivity.this, 
 				"The username does not exist.\n", 
 				Toast.LENGTH_SHORT);
-	    	
-	    	
+	   
+	    // if the password is remembered
+		if (getSharedPreferences(Remember.PREFS_NAME, MODE_PRIVATE).getBoolean(Remember.IF_PREF, false)) {
+			if (WebConnectionCheck.hasInternetConnection(LoginActivity.this)) {
+
+				new Thread(new Runnable() {
+	    			@Override
+	    			public void run() {
+	    				try {
+	    					LoginActivity.this.runOnUiThread(new Runnable() {
+	
+	    						@Override
+	    						public void run() {
+	    							LoginActivity.this.startLoginDialog();
+	    						}
+	    					});
+						
+						
+	    					String usernameString = getSharedPreferences(Remember.PREFS_NAME, MODE_PRIVATE).getString(Remember.PREF_USERNAME, null);
+	    					String passwordString = getSharedPreferences(Remember.PREFS_NAME, MODE_PRIVATE).getString(Remember.PREF_PASSWORD, null);	
+							
+	    					int loginResult = FoodieClient.getInstance().clientLogin(usernameString, passwordString);
+						
+	    					if (loginResult == -1) {
+	    						LoginActivity.this.runOnUiThread(new Runnable() {
+	
+	    							@Override
+	    							public void run() {
+	    								LoginActivity.this.dismissProgressDialog();
+	    							}
+	    						});
+	    						getSharedPreferences(Remember.PREFS_NAME, MODE_PRIVATE).edit().putBoolean(Remember.IF_PREF, false);
+	    						noUserToast.show();
+	    						Log.i(TAG + "login click", "does not exist");
+	    					} else if (loginResult == -2) {
+	    						LoginActivity.this.runOnUiThread(new Runnable() {
+	
+	    							@Override
+	    							public void run() {
+	    								LoginActivity.this.dismissProgressDialog();
+	    							}
+	    						});
+	    						getSharedPreferences(Remember.PREFS_NAME, MODE_PRIVATE).edit().putBoolean(Remember.IF_PREF, false);
+	    						wrongpwToast.show(); 
+	    						Log.i(TAG + "login click", "wrong password");
+	    					} else {
+	    						Log.i(TAG + "login click", "right");
+	    						LoginActivity.this.runOnUiThread(new Runnable() {
+	
+	    							@Override
+	    							public void run() {
+									
+	    								Intent intent = new Intent (LoginActivity.this, MainActivity.class);
+	    								LoginActivity.this.startActivity(intent);
+	    								LoginActivity.this.dismissProgressDialog();
+	    							}
+	    						});
+	    					}
+	    				} catch (IOException e) {
+	    					e.printStackTrace();
+	    				} 		
+	    			}
+	    		}).start();
+			}
+		}
+		
+		
+		
 		tryit.setOnClickListener(new OnClickListener() {
 
 		    @Override
 		    public void onClick(View arg0) {
-		    	if (!hasInternetConnection()) {
+		    	if (!WebConnectionCheck.hasInternetConnection(LoginActivity.this)) {
 		    		checkToast.show();
 		    	}
 		    	else {
@@ -83,7 +151,7 @@ public class LoginActivity extends Activity {
 
 			@Override
 			public void onClick(View arg0) {
-		    	if (!hasInternetConnection()) {
+		    	if (!WebConnectionCheck.hasInternetConnection(LoginActivity.this)) {
 		    		checkToast.show();
 		    	}
 		    	else if (username.getText().toString().length()==0
@@ -133,8 +201,16 @@ public class LoginActivity extends Activity {
 		    						Log.i(TAG + "login click", "wrong password");
 		    					} else {
 		    						Log.i(TAG + "login click", "right");
+		    						
+		    						getSharedPreferences(Remember.PREFS_NAME,MODE_PRIVATE)
+		    				        	.edit()
+		    				        	.putString(Remember.PREF_USERNAME, usernameString)
+		    				        	.putString(Remember.PREF_PASSWORD, passwordString)
+		    				        	.putBoolean(Remember.IF_PREF, true)
+		    				        	.commit();
+		    						
 		    						LoginActivity.this.runOnUiThread(new Runnable() {
-
+		    						
 		    							@Override
 		    							public void run() {
 										
@@ -202,7 +278,7 @@ public class LoginActivity extends Activity {
 
 			@Override
 			public void onClick(View arg0) {
-		    	if (!hasInternetConnection()) {
+		    	if (!WebConnectionCheck.hasInternetConnection(LoginActivity.this)) {
 		    		checkToast.show();
 		    	}
 		    	else if (username.getText().toString().length()==0
@@ -296,14 +372,5 @@ public class LoginActivity extends Activity {
 		this.startActivity(intent);
 	}
 	
-	public boolean hasInternetConnection() {
-	    ConnectivityManager cm =
-	    		(ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
-	    NetworkInfo netInfo = cm.getActiveNetworkInfo();
-	    if (netInfo != null && netInfo.isConnected()) {    	
-	    	return true;
-	    } 
-	    return false;
-	}
 
 }

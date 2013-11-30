@@ -20,6 +20,7 @@ import android.widget.Toast;
 import com.example.foodie.R;
 
 import edu.umich.eecs441.foodie.database.FoodieClient;
+import edu.umich.eecs441.foodie.web.WebConnectionCheck;
 
 public class MainActivity extends Activity {
 	
@@ -38,6 +39,8 @@ public class MainActivity extends Activity {
 		
 		final Toast loginToast = Toast.makeText(MainActivity.this, 
 				"Please log in.", Toast.LENGTH_SHORT);
+		final Toast checkToast = Toast.makeText(MainActivity.this, 
+				"Please connect to internet.", Toast.LENGTH_SHORT);
 		
 		Log.i("Main Activity", "Check tessdata");
 		
@@ -97,9 +100,16 @@ public class MainActivity extends Activity {
 
 		    @Override
 		    public void onClick(View arg0) {
-		    	searchButton.setBackground(getResources().getDrawable(R.drawable.search2));
-		    	homeButton.setBackground(getResources().getDrawable(R.drawable.home1));
-		    	onGoToSearch(arg0);
+		    	if (!WebConnectionCheck.hasInternetConnection(MainActivity.this))
+		    	{
+		    		checkToast.show();
+		    	}
+		    	else
+		    	{
+		    		searchButton.setBackground(getResources().getDrawable(R.drawable.search2));
+		    		homeButton.setBackground(getResources().getDrawable(R.drawable.home1));
+		    		onGoToSearch(arg0);
+		    	}
 		    }
 		});
 		
@@ -108,11 +118,18 @@ public class MainActivity extends Activity {
 
 		    @Override
 		    public void onClick(View arg0) {
-		    	if (FoodieClient.getInstance().getClientStatus() == FoodieClient.ONLINE) {
-		    		bookMarkButton.setBackground(getResources().getDrawable(R.drawable.bookmark2));
-			    	onGoToBookmark(arg0);
-		    	} else {
-		    		loginToast.show();
+		    	if (!WebConnectionCheck.hasInternetConnection(MainActivity.this))
+		    	{
+		    		checkToast.show();
+		    	}
+		    	else
+		    	{
+		    		if (FoodieClient.getInstance().getClientStatus() == FoodieClient.ONLINE) {
+		    			bookMarkButton.setBackground(getResources().getDrawable(R.drawable.bookmark2));
+		    			onGoToBookmark(arg0);
+		    		} else {
+		    			loginToast.show();
+		    		}
 		    	}
 		    }
 		});
@@ -120,11 +137,11 @@ public class MainActivity extends Activity {
 		logoutButton = (Button) findViewById(R.id.logoutButton);
 		if (FoodieClient.getInstance().getClientStatus() == FoodieClient.ONLINE) {
 			logoutButton.setOnClickListener(new OnClickListener() {
-
+				
 			    @Override
 			    public void onClick(View arg0) {
 			    	logoutButton.setBackground(getResources().getDrawable(R.drawable.logout2));
-			    	// TODO: log out code
+			    	getSharedPreferences(Remember.PREFS_NAME, MODE_PRIVATE).edit().putBoolean(Remember.IF_PREF, false).commit();	
 			    	onGoToHome(arg0);
 			    	FoodieClient.getInstance().clientLogout();
 			    }

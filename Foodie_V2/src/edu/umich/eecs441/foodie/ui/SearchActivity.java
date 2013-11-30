@@ -304,6 +304,22 @@ public class SearchActivity extends Activity {
 			mCamera.release();
 			mCamera = null;
 		}
+		FrameLayout preview = (FrameLayout) findViewById(R.id.camera_preview);
+		preview.removeView(mPreview);
+	}
+	
+	@Override
+	protected void onResume() {
+		Log.i("cameratest", "onResume");
+		super.onResume(); // Always call the superclass method first
+		
+		if(mCamera == null)
+		{
+			mCamera = getCameraInstance();
+			mPreview = new CameraPreview(this, mCamera);
+			FrameLayout preview = (FrameLayout) findViewById(R.id.camera_preview);
+			preview.addView(mPreview);		
+		}
 	}
 
 	//-------------

@@ -14,6 +14,7 @@ import com.example.foodie.R;
 import edu.umich.eecs441.foodie.database.FoodieClient;
 import edu.umich.eecs441.foodie.database.MealEntry;
 import edu.umich.eecs441.foodie.mark.BookmarkAdapter;
+import edu.umich.eecs441.foodie.web.WebConnectionCheck;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -30,6 +31,7 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.Toast;
 
 public class BookmarkActivity extends Activity {
 	
@@ -57,6 +59,8 @@ public class BookmarkActivity extends Activity {
 		setContentView(R.layout.activity_bookmarks);
 		
 		bookmarkList = (ListView)this.findViewById(R.id.listView1);
+		final Toast checkToast = Toast.makeText(BookmarkActivity.this, 
+				"Please connect to internet.", Toast.LENGTH_SHORT);
 		
 		
 		new Thread (new Runnable() {
@@ -152,9 +156,16 @@ public class BookmarkActivity extends Activity {
 
 		    @Override
 		    public void onClick(View arg0) {
-		    	searchButton.setBackground(getResources().getDrawable(R.drawable.search2));
-		    	bookMarkButton.setBackground(getResources().getDrawable(R.drawable.bookmark1));
-		    	onGoToSearch(arg0);
+		    	if (!WebConnectionCheck.hasInternetConnection(BookmarkActivity.this))
+		    	{
+		    		checkToast.show();
+		    	}
+		    	else
+		    	{
+		    		searchButton.setBackground(getResources().getDrawable(R.drawable.search2));
+		    		bookMarkButton.setBackground(getResources().getDrawable(R.drawable.bookmark1));
+		    		onGoToSearch(arg0);
+		    	}
 		    }
 		});
 		
@@ -163,7 +174,14 @@ public class BookmarkActivity extends Activity {
 
 		    @Override
 		    public void onClick(View arg0) {
-		    	bookMarkButton.setBackground(getResources().getDrawable(R.drawable.bookmark2));
+		    	if (!WebConnectionCheck.hasInternetConnection(BookmarkActivity.this))
+		    	{
+		    		checkToast.show();
+		    	}
+		    	else
+		    	{
+		    		bookMarkButton.setBackground(getResources().getDrawable(R.drawable.bookmark2));
+		    	}
 		    }
 		});
 	}
