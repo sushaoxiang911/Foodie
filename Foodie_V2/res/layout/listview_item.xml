@@ -15,38 +15,15 @@
  
         <ImageView
             android:id="@+id/list_image"
-            android:layout_width="50dip"
-            android:layout_height="50dip"
+            android:layout_width="200dip"
+            android:layout_height="200dip"
             android:src="@drawable/ic_launcher"/>
  
     </LinearLayout>
  
     <!-- Title Of Song-->
-    <TextView
-        android:id="@+id/meal_name"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/thumbnail"
-        android:layout_toRightOf="@+id/thumbnail"
-        android:text="Rihanna Love the way lie"
-        android:textColor="#040404"
-        android:typeface="sans"
-        android:textSize="15dip"
-        android:textStyle="bold"/>
  
     <!-- Artist Name -->
-
-    <TextView
-        android:id="@+id/translation"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/meal_name"
-        android:layout_marginTop="1dip"
-        android:layout_toLeftOf="@+id/button1"
-        android:layout_toRightOf="@+id/thumbnail"
-        android:text="Just gona stand there and ..."
-        android:textColor="#343434"
-        android:textSize="10dip" />
 
 <!-- 
     <TextView
@@ -64,13 +41,36 @@
   --> 
      <!-- Rightend Arrow -->
 
+    <TextView
+        android:id="@+id/meal_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/thumbnail"
+        android:layout_below="@+id/thumbnail"
+        android:layout_marginLeft="16dp"
+        android:text="Rihanna Love the way lie"
+        android:textColor="#040404"
+        android:textSize="15dip"
+        android:textStyle="bold"
+        android:typeface="sans" />
+
+    <TextView
+        android:id="@+id/translation"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignRight="@+id/thumbnail"
+        android:layout_below="@+id/meal_name"
+        android:text="Just gona stand there and ..."
+        android:textColor="#343434"
+        android:textSize="10dip" />
+
     <Button
         android:id="@+id/deletebutton"
         style="?android:attr/buttonStyleSmall"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentTop="true"
+        android:layout_alignBottom="@+id/translation"
+        android:layout_toRightOf="@+id/thumbnail"
         android:text="Button" />
 
 </RelativeLayout>
