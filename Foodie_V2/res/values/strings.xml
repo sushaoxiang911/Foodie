@@ -15,5 +15,10 @@
      <string name="thanks1">Special thanks to Meishij.net</string>
      <string name="thanks2">All food pictures are from Meishij.net</string>
      
+     <string name="foodnameC">Chinese food name</string>
+     <string name="foodnameE">English food name</string>
+     
+     <string name="delete">Delete</string>
+     
 
 </resources>

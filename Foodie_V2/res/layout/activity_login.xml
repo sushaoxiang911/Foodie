@@ -113,6 +113,7 @@
                         android:textSize="27px"
                         android:gravity="center_vertical"
                         android:hint="  Username"
+                        android:typeface="sans"
                         android:singleLine="true"/>
                            
                     </LinearLayout>
@@ -167,6 +168,7 @@
                         android:hint=" Password"
                         android:inputType="textPassword"
                         android:password="true"
+                        android:typeface="sans"
                         android:singleLine="true"/>
                            
                     </LinearLayout>

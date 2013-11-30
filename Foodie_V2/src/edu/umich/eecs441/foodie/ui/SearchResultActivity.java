@@ -118,11 +118,13 @@ public class SearchResultActivity extends Activity  implements ContentSettable{
 			button.setOnClickListener(new OnClickListener () {
 				@Override
 				public void onClick(View arg0) {
+					button.setBackground(getResources().getDrawable(R.drawable.star2));
 					// mealEntry is not null
 					if (newMealEntry != null) {
 						// check if the mealEntry is existed
 						// here I use button text, actually, you can call back and set a guard to denote that
-						if (button.getText().toString().equals("existed")) {
+						Log.i(TAG + "mark onClick button background id", button.getBackground().toString());
+						if (**********************TODO) {
 							Log.i(TAG + "mark onClick", "mealEntry existed");
 							new Thread(new Runnable() {
 								@Override
@@ -154,7 +156,6 @@ public class SearchResultActivity extends Activity  implements ContentSettable{
 								}
 							}).start();		
 						} else {
-							
 							Log.i(TAG + "mark onClick", "mealEntry not existed");
 							new Thread(new Runnable() {
 								@Override
@@ -317,9 +318,9 @@ public class SearchResultActivity extends Activity  implements ContentSettable{
 	// the callback of control button
 	public void setButtonText (boolean existed) {
 		if (existed) {
-			button.setText("existed");
+			button.setBackground(getResources().getDrawable(R.drawable.star2));
 		} else {
-			button.setText("Not existed");
+			button.setBackground(getResources().getDrawable(R.drawable.star1));
 		}
 	}
 

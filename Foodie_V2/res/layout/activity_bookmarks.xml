@@ -17,14 +17,31 @@
          <LinearLayout
                android:layout_width="match_parent"
                android:layout_height="match_parent"
-               android:layout_weight="1.5" >
+               android:layout_weight="1.5" 
+               android:orientation="vertical">
+               
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="3"
+                    android:background="@drawable/nothing">
+                    
+                    <ListView
+	                    android:id="@+id/listView1"
+	                    android:layout_width="fill_parent"
+	                    android:layout_height="wrap_content"
+	                    android:divider="#F6F6F6"
+	                    android:dividerHeight="4dp"/>
+                </LinearLayout>
 
-      			<ListView
-           			android:id="@+id/listView1"
-          	      	android:layout_width="fill_parent"
-       		 		android:layout_height="wrap_content"
-      				android:divider="#b5b5b5"
-        			android:dividerHeight="1dp"/>
+      			
+      			<LinearLayout
+	                android:layout_width="match_parent"
+	                android:layout_height="match_parent"
+	                android:layout_weight="90"
+	                android:background="@drawable/nothing">
+	            </LinearLayout>
+            
          </LinearLayout>
         
         <LinearLayout
