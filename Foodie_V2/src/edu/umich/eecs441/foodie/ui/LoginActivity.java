@@ -2,18 +2,12 @@ package edu.umich.eecs441.foodie.ui;
 
 import java.io.IOException;
 
-import com.example.foodie.R;
-
-import edu.umich.eecs441.foodie.database.FoodieClient;
-import edu.umich.eecs441.foodie.web.WebConnectionCheck;
 import android.app.Activity;
 import android.app.ProgressDialog;
-import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
-import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
+import android.graphics.Typeface;
 import android.os.Bundle;
+import android.text.method.PasswordTransformationMethod;
 import android.util.Log;
 import android.view.Menu;
 import android.view.View;
@@ -22,6 +16,11 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.example.foodie.R;
+
+import edu.umich.eecs441.foodie.database.FoodieClient;
+import edu.umich.eecs441.foodie.web.WebConnectionCheck;
 
 public class LoginActivity extends Activity {
 	
@@ -41,6 +40,8 @@ public class LoginActivity extends Activity {
 		setContentView (R.layout.activity_login);
 		username = (EditText) this.findViewById(R.id.username);
 		password = (EditText) this.findViewById(R.id.password);
+		password.setTypeface(Typeface.DEFAULT);
+		//password.setTransformationMethod(new PasswordTransformationMethod());
 		login = (Button) this.findViewById(R.id.button1);
 		signup = (Button) this.findViewById(R.id.button2);
 		tryit = (Button) this.findViewById(R.id.button3);
@@ -50,7 +51,7 @@ public class LoginActivity extends Activity {
 		final Toast inputToast = Toast.makeText(LoginActivity.this, 
 				"Username and password can NOT be empty.", Toast.LENGTH_SHORT);
 		final Toast signupTipToast = Toast.makeText(LoginActivity.this, 
-				"Please fill in the blanks above.", 
+				"Please fill in both of the blanks above.", 
 				Toast.LENGTH_SHORT);
 		
 		final Toast wrongpwToast = Toast.makeText(LoginActivity.this, 
@@ -184,6 +185,8 @@ public class LoginActivity extends Activity {
 
 		    							@Override
 		    							public void run() {
+		    								username.setText("");
+		    								password.setText("");
 		    								LoginActivity.this.dismissProgressDialog();
 		    							}
 		    						});
@@ -194,6 +197,7 @@ public class LoginActivity extends Activity {
 
 		    							@Override
 		    							public void run() {
+		    								password.setText("");
 		    								LoginActivity.this.dismissProgressDialog();
 		    							}
 		    						});

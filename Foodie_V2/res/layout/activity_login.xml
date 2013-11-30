@@ -167,8 +167,6 @@
                         android:gravity="center_vertical"
                         android:hint=" Password"
                         android:inputType="textPassword"
-                        android:password="true"
-                        android:typeface="sans"
                         android:singleLine="true"/>
                            
                     </LinearLayout>
