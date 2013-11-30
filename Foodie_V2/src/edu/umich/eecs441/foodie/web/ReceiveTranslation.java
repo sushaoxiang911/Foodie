@@ -124,7 +124,7 @@ public class ReceiveTranslation{
 						}
 					}
 					if (result.length() != 0) {
-						return "Food name: " + result;
+						return result;
 //						contentSettableActivity.setText(result.substring(0, result.length() - 1));
 					} else {
 						Log.i(TAG + "Translate", "No Result");
@@ -153,7 +153,7 @@ public class ReceiveTranslation{
 					}
 				}
 				if (result.length() != 0) {
-					return "Food name: " + result;
+					return result;
 //					contentSettableActivity.setText(result.substring(0, result.length() - 1));
 				} else {
 					Log.i(TAG + "Translate", "No Result");
