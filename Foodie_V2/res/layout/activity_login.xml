@@ -165,7 +165,7 @@
                         android:ems="10"
                         android:textSize="27px"
                         android:gravity="center_vertical"
-                        android:hint=" Password"
+                        android:hint="  Password"
                         android:inputType="textPassword"
                         android:singleLine="true"/>
                            
