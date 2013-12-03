@@ -1,6 +1,6 @@
 package edu.umich.eecs441.foodie.ui;
 
-import com.example.foodie.R;
+import edu.umich.eecs441.foodie.R;
 import edu.umich.eecs441.foodie.database.FoodieClient;
 import edu.umich.eecs441.foodie.web.WebConnectionCheck;
 import android.app.Activity;

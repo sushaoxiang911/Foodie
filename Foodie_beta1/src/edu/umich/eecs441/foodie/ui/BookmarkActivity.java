@@ -6,7 +6,8 @@ import java.io.InputStream;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
-import com.example.foodie.R;
+
+import edu.umich.eecs441.foodie.R;
 import edu.umich.eecs441.foodie.database.FoodieClient;
 import edu.umich.eecs441.foodie.database.MealEntry;
 import edu.umich.eecs441.foodie.mark.BookmarkAdapter;

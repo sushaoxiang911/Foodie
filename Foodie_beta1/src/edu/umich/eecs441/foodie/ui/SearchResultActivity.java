@@ -1,7 +1,7 @@
 package edu.umich.eecs441.foodie.ui;
 
 import java.io.IOException;
-import com.example.foodie.R;
+import edu.umich.eecs441.foodie.R;
 import edu.umich.eecs441.foodie.database.FoodieClient;
 import edu.umich.eecs441.foodie.database.MealEntry;
 import edu.umich.eecs441.foodie.web.AsyncOperation;

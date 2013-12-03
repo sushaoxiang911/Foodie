@@ -1,7 +1,7 @@
 package edu.umich.eecs441.foodie.ui;
 
 import java.io.IOException;
-import com.example.foodie.R;
+import edu.umich.eecs441.foodie.R;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;

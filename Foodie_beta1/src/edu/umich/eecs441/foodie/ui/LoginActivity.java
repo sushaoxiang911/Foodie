@@ -13,7 +13,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
-import com.example.foodie.R;
+import edu.umich.eecs441.foodie.R;
 import edu.umich.eecs441.foodie.database.FoodieClient;
 import edu.umich.eecs441.foodie.web.WebConnectionCheck;
 
