@@ -103,10 +103,8 @@ public class BookmarkActivity extends Activity {
 				});
 			}
 		}).start();
-			
 		homeButton = (Button) findViewById(R.id.homeButton);
 		homeButton.setOnClickListener(new OnClickListener() {
-
 		    @Override
 		    public void onClick(View arg0) {
 		    	homeButton.setBackground(getResources().getDrawable(R.drawable.home2));
