@@ -74,18 +74,14 @@ public class ReceivePicture{
 			return null;
 				
 		}
-		Elements links = content.getElementsByClass("cpimg");
+		Elements links = content.getElementsByClass("img");
 		if (links.size() == 0) {
 			return null;
 				
 		}
 		String picContent = links.first().absUrl("src");
-		//get the pic meal name
-		Elements nameLinks = content.getElementsByClass("info1");
-		if (nameLinks.size() == 0) {
-		}
 		// get meal name
-		picMealName = nameLinks.first().getElementsByTag("a").first().text();
+		picMealName = links.first().attr("alt");
 			
 		picUrl = picContent;
 		return getPicture(picContent);
